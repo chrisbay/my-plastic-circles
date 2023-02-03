@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,13 +31,26 @@
         </nav>
 
         <main class="container-fluid">
-            <div class="p-5 mb-4 bg-light rounded-3">
-                <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">Your discs, organized</h1>
-                    <p class="col-md-8 fs-4">Keep track of your discs, all in one place</p>
-                    <a class="btn btn-success btn-lg" href="/discs" role="button">Get Started</a>
-                </div>
-            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><c:out value="Model" /></th>
+                        <th><c:out value="Manufacturer" /></th>
+                        <th><c:out value="Flight Numbers" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="disc" items="${discs}">
+                        <tr>
+                            <td><c:out value="${disc.manufacturer}" /></td>
+                            <td><c:out value="${disc.model}" /></td>
+                            <td><c:out value="${disc.speed}" /> / <c:out value="${disc.glide}" /> / <c:out value="${disc.turn}" /> / <c:out value="${disc.fade}" /></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
         </main>
 
     </body>
