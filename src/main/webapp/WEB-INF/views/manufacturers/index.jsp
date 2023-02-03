@@ -25,6 +25,8 @@
                 </tbody>
             </table>
 
+            <a class="btn btn-primary" href="/manufacturers/new">Add Manufacturer</a>
+
         </main>
 
     </body>
