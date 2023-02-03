@@ -4,7 +4,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 public class Disc extends AbstractEntity {
 
@@ -12,9 +11,7 @@ public class Disc extends AbstractEntity {
     @Size(min=2, max=50, message = "Model must be between 2 and 50 characters")
     private String model;
 
-    @NotNull
-    @Size(min=2, max=50)
-    private String manufacturer;
+    private DiscManufacturer manufacturer;
 
     @Min(value = 1, message = "Speed must be between 1 and 14")
     @Max(value = 14, message = "Speed must be between 1 and 14")
@@ -34,7 +31,7 @@ public class Disc extends AbstractEntity {
 
     public Disc () {}
 
-    public Disc(String model, String manufacturer, Integer speed, Integer glide, Integer turn, Integer fade) {
+    public Disc(String model, DiscManufacturer manufacturer, Integer speed, Integer glide, Integer turn, Integer fade) {
         super();
         this.model = model;
         this.manufacturer = manufacturer;
@@ -52,11 +49,11 @@ public class Disc extends AbstractEntity {
         this.model = model;
     }
 
-    public String getManufacturer() {
+    public DiscManufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(String manufacturer) {
+    public void setManufacturer(DiscManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 

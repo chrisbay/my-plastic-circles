@@ -19,37 +19,41 @@
                     <sf:form method="POST" modelAttribute="disc">
 
                         <div class="mb-3">
-                            <label class="form-label" for="name-input">Model</label>
-                            <sf:input path="model" id="name-input" class="form-control" />
+                            <label class="form-label" for="model-input">Model</label>
+                            <sf:input path="model" id="model-input" class="form-control" />
                             <sf:errors path="model" cssClass="form-error" />
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="name-input">Manufacturer</label>
-                            <sf:input path="manufacturer" id="name-input" class="form-control" />
+                            <label class="form-label" for="manufacturer-input">Manufacturer</label>
+                            <select name="manufacturerId" id="manufacturer-input" class="form-control">
+                                <c:forEach var="manufacturer" items="${manufacturers}">
+                                    <option value="${manufacturer.id}"><c:out value="${manufacturer.name}" /></option>
+                                </c:forEach>
+                            </select>
                             <sf:errors path="manufacturer" cssClass="form-error" />
                         </div>
 
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-3">
-                                    <label class="form-label" for="name-input">Speed</label>
-                                    <sf:input path="speed" type="number" id="name-input" class="form-control" />
+                                    <label class="form-label" for="speed-input">Speed</label>
+                                    <sf:input path="speed" type="number" id="speed-input" class="form-control" />
                                     <sf:errors path="speed" cssClass="form-error" />
                                 </div>
                                 <div class="col-3">
-                                    <label class="form-label" for="name-input">Glide</label>
-                                    <sf:input path="glide" type="number" id="name-input" class="form-control" />
+                                    <label class="form-label" for="glide-input">Glide</label>
+                                    <sf:input path="glide" type="number" id="glide-input" class="form-control" />
                                     <sf:errors path="glide" cssClass="form-error" />
                                 </div>
                                 <div class="col-3">
-                                    <label class="form-label" for="name-input">Turn</label>
-                                    <sf:input path="turn" type="number" id="name-input" class="form-control" />
+                                    <label class="form-label" for="turn-input">Turn</label>
+                                    <sf:input path="turn" type="number" id="turn-input" class="form-control" />
                                     <sf:errors path="turn" cssClass="form-error" />
                                 </div>
                                 <div class="col-3">
-                                    <label class="form-label" for="name-input">Fade</label>
-                                    <sf:input path="fade" type="number" id="name-input" class="form-control" />
+                                    <label class="form-label" for="fade-input">Fade</label>
+                                    <sf:input path="fade" type="number" id="fade-input" class="form-control" />
                                     <sf:errors path="fade" cssClass="form-error" />
                                 </div>
                             </div>

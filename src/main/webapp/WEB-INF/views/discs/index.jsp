@@ -16,15 +16,15 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th><c:out value="Model" /></th>
                         <th><c:out value="Manufacturer" /></th>
+                        <th><c:out value="Model" /></th>
                         <th><c:out value="Flight Numbers" /></th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="disc" items="${discs}">
                         <tr>
-                            <td><c:out value="${disc.manufacturer}" /></td>
+                            <td><c:out value="${disc.manufacturer.name}" /></td>
                             <td><c:out value="${disc.model}" /></td>
                             <td><c:out value="${disc.speed}" /> / <c:out value="${disc.glide}" /> / <c:out value="${disc.turn}" /> / <c:out value="${disc.fade}" /></td>
                         </tr>
