@@ -2,10 +2,7 @@ package net.chrisbay.model;
 
 import java.util.Objects;
 
-public class Disc {
-
-    private final Integer id;
-    private static Integer nextId = 1;
+public class Disc extends AbstractEntity {
 
     private String model;
     private String manufacturer;
@@ -14,13 +11,8 @@ public class Disc {
     private Integer turn;
     private Integer fade;
 
-    private Disc () {
-        this.id = nextId;
-        this.nextId++;
-    }
-
     public Disc(String model, String manufacturer, Integer speed, Integer glide, Integer turn, Integer fade) {
-        this();
+        super();
         this.model = model;
         this.manufacturer = manufacturer;
         this.speed = speed;
@@ -77,20 +69,4 @@ public class Disc {
         this.fade = fade;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Disc disc = (Disc) o;
-        return id.equals(disc.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
