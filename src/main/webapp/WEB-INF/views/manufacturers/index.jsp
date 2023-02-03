@@ -11,6 +11,8 @@
 
         <main class="container-fluid">
 
+            <a class="btn btn-primary" href="/manufacturers/new">Add Manufacturer</a>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -24,8 +26,6 @@
                     </c:forEach>
                 </tbody>
             </table>
-
-            <a class="btn btn-primary" href="/manufacturers/new">Add Manufacturer</a>
 
         </main>
 

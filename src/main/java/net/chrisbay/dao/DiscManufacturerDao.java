@@ -12,12 +12,6 @@ public class DiscManufacturerDao implements Dao<DiscManufacturer> {
 
     private Map<Integer, DiscManufacturer> manufacturers = new HashMap<>();
 
-    public DiscManufacturerDao () {
-        this.save(new DiscManufacturer("Discraft"));
-        this.save(new DiscManufacturer("Gateway"));
-        this.save(new DiscManufacturer("Mint"));
-    }
-
     @Override
     public Optional<DiscManufacturer> get(Integer id) {
         return Optional.ofNullable(this.manufacturers.get(id));

@@ -11,6 +11,8 @@
 
         <main class="container-fluid">
 
+            <a class="btn btn-primary" href="/discs/new">Add Disc</a>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
