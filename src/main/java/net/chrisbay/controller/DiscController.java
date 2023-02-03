@@ -17,6 +17,7 @@ public class DiscController {
 
     @GetMapping
     public String displayAllDiscs (Model model) {
+        model.addAttribute("pageTitle", "My Discs");
         model.addAttribute("discs", discDao.getAll());
         return "discs/index";
     }
