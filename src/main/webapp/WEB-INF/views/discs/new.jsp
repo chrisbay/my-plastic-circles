@@ -59,6 +59,14 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label class="form-label" for="notes-input">Notes</label>
+                                <sf:textarea path="notes" id="notes-input" class="form-control" />
+                                <sf:errors path="notes" cssClass="form-error" />
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-success">Create</button>
                     </sf:form>
 

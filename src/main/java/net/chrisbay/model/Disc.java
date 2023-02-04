@@ -29,6 +29,8 @@ public class Disc extends AbstractEntity {
     @Max(value = 5, message = "Fade must be between 0 and 5")
     private Integer fade;
 
+    private String notes;
+
     public Disc () {}
 
     public Disc(String model, DiscManufacturer manufacturer, Integer speed, Integer glide, Integer turn, Integer fade) {
@@ -89,4 +91,11 @@ public class Disc extends AbstractEntity {
         this.fade = fade;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
