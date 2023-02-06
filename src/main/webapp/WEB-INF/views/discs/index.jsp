@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="discsApp">
     <head>
         <%@ include file="/WEB-INF/views/shared/head.jsp" %>
     </head>
@@ -13,39 +13,38 @@
 
             <a class="btn btn-primary" href="/discs/new">Add Disc</a>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Manufacturer</th>
-                        <th>Model</th>
-                        <th>Flight Numbers</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="disc" items="${discs}">
+            <div ng-controller="DiscController">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>
-                            <c:choose>
-                                <c:when test="${disc.favorite}">
-                                    <i class='fa-solid fa-star'></i>
-                                </c:when>
-                                <c:otherwise>
-                                    <i class='fa-regular fa-star'></i>
-                                </c:otherwise>
-                            </c:choose>
-                            </td>
-                            <td><c:out value="${disc.manufacturer.name}" /></td>
-                            <td><c:out value="${disc.model}" /></td>
-                            <td><c:out value="${disc.speed}" /> / <c:out value="${disc.glide}" /> / <c:out value="${disc.turn}" /> / <c:out value="${disc.fade}" /></td>
-                            <td><c:out value="${disc.notes}" /></td>
+                            <th></th>
+                            <th>Manufacturer</th>
+                            <th>Model</th>
+                            <th>Flight Numbers</th>
+                            <th>Notes</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="disc in discs">
+                            <td>
+                                <i ng-click="toggleFavorite(disc)"
+                                   ng-class="disc.favorite ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+                            </td>
+                            <td>{{disc.manufacturer.name}}</td>
+                            <td>{{disc.model}}</td>
+                            <td>{{disc.speed}} / {{disc.glide}} / {{disc.turn}} / {{disc.fade}}</td>
+                            <td>{{disc.notes}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </main>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="/static/js/app.js"></script>
+        <script src="/static/js/services/DiscService.js"></script>
+        <script src="/static/js/controllers/DiscController.js"></script>
 
     </body>
 </html>

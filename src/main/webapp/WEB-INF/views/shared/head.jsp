@@ -17,4 +17,9 @@
 <script src="/webjars/bootstrap/5.2.3/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/webjars/font-awesome/6.2.1/css/all.min.css">
 
-<link rel="stylesheet" href="/static/css/site.css">
+<style>
+.form-error {
+    color: red;
+    font-size: 0.9rem;
+}
+</style>
