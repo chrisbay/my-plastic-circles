@@ -16,6 +16,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Manufacturer</th>
                         <th>Model</th>
                         <th>Flight Numbers</th>
@@ -25,6 +26,16 @@
                 <tbody>
                     <c:forEach var="disc" items="${discs}">
                         <tr>
+                            <td>
+                            <c:choose>
+                                <c:when test="${disc.favorite}">
+                                    <i class='fa-solid fa-star'></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class='fa-regular fa-star'></i>
+                                </c:otherwise>
+                            </c:choose>
+                            </td>
                             <td><c:out value="${disc.manufacturer.name}" /></td>
                             <td><c:out value="${disc.model}" /></td>
                             <td><c:out value="${disc.speed}" /> / <c:out value="${disc.glide}" /> / <c:out value="${disc.turn}" /> / <c:out value="${disc.fade}" /></td>

@@ -31,6 +31,8 @@ public class Disc extends AbstractEntity {
 
     private String notes;
 
+    private Boolean isFavorite = false;
+
     public Disc () {}
 
     public Disc(String model, DiscManufacturer manufacturer, Integer speed, Integer glide, Integer turn, Integer fade) {
@@ -97,5 +99,13 @@ public class Disc extends AbstractEntity {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Boolean getFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        isFavorite = favorite;
     }
 }

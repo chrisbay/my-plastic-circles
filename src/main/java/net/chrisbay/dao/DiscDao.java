@@ -16,7 +16,7 @@ public class DiscDao implements Dao<Disc> {
     }
 
     @Override
-    public Iterable<Disc> getAll() {
+    public Collection<Disc> getAll() {
         return this.discs.values();
     }
 

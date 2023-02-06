@@ -15,6 +15,6 @@
 
 <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
 <script src="/webjars/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/webjars/font-awesome/6.2.1/css/fontawesome.min.css">
+<link rel="stylesheet" href="/webjars/font-awesome/6.2.1/css/all.min.css">
 
 <link rel="stylesheet" href="/static/css/site.css">
