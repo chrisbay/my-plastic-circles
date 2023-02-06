@@ -1,3 +1,4 @@
-'use strict';
-
-const discsApp = angular.module('discsApp', []);
+(function(){
+    'use strict';
+    angular.module('discsApp', []);
+})();

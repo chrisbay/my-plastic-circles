@@ -1,9 +1,17 @@
-'use strict';
+(function() {
+    'use strict';
 
-discsApp.controller('DiscController',
-    ['$scope', 'DiscService', function ($scope, DiscService) {
-        const self = $scope;
-        $scope.discs = [];
+    angular
+        .module('discsApp')
+        .controller('DiscController', DiscController);
+
+    DiscController.$inject = ['$scope', 'DiscService'];
+
+    function DiscController ($scope, DiscService) {
+        const self = this;
+        self.discs = [];
+
+        self.toggleFavoriteStatus = toggleFavoriteStatus;
 
         fetchAllDiscs();
 
@@ -11,20 +19,19 @@ discsApp.controller('DiscController',
             DiscService.fetchAllDiscs()
                 .then(function(data) {
                       $scope.discs = data;
+                      return $scope.discs;
                 }, function (err) {
                     console.error("Error while fetching discs");
                 });
         }
 
-        $scope.toggleFavorite = function (disc) {
-            disc.favorite = !disc.favorite;
-            DiscService.updateDisc(disc)
+        function toggleFavoriteStatus(disc) {
+            DiscService.toggleFavoriteStatus(disc)
                 .then(function(data) {
-                    // do nothing
+                    return data;
                 }, function (err) {
-                    disc.favorite = !disc.favorite;
                     alert("Error updating disc");
                 });
         };
-    }]
-);
+    }
+})();

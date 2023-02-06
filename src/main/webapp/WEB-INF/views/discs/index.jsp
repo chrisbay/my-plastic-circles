@@ -13,7 +13,7 @@
 
             <a class="btn btn-primary" href="/discs/new">Add Disc</a>
 
-            <div ng-controller="DiscController">
+            <div ng-controller="DiscController as collection">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -25,9 +25,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="disc in discs">
+                        <tr ng-repeat="disc in this.discs">
                             <td>
-                                <i ng-click="toggleFavorite(disc)"
+                                <i ng-click="collection.toggleFavoriteStatus(disc)"
                                    ng-class="disc.favorite ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
                             </td>
                             <td>{{disc.manufacturer.name}}</td>

@@ -1,14 +1,22 @@
-'use strict';
+(function(){
+    'use strict';
 
-discsApp.factory('DiscService', ['$http', '$q',
+    angular
+        .module('discsApp')
+        .factory('DiscService', DiscService);
 
-    function ($http, $q) {
+    DiscService.$inject = ['$http', '$q'];
 
+    function DiscService($http, $q) {
         const REST_SERVICES_URL = 'http://localhost:8080/api';
 
-        const factory = {};
+        const factory = {
+            fetchAllDiscs: fetchAllDiscs,
+            toggleFavoriteStatus: toggleFavoriteStatus,
+            updateDisc: updateDisc
+        };
 
-        factory.fetchAllDiscs = function() {
+        function fetchAllDiscs() {
             const deferred = $q.defer();
             $http.get(REST_SERVICES_URL + '/disc')
                 .then(function(res) {
@@ -20,7 +28,7 @@ discsApp.factory('DiscService', ['$http', '$q',
             return deferred.promise;
         };
 
-        factory.updateDisc = function(disc) {
+        function updateDisc(disc) {
             const deferred = $q.defer();
             $http.put(REST_SERVICES_URL + '/disc/' + disc.id, disc)
                 .then(function(res) {
@@ -32,7 +40,18 @@ discsApp.factory('DiscService', ['$http', '$q',
             return deferred.promise;
         };
 
+        function toggleFavoriteStatus(disc) {
+            disc.favorite = !disc.favorite;
+            const promise = updateDisc(disc)
+                .then(function(data) {
+                    return data;
+                }, function (err) {
+                    disc.favorite = !disc.favorite;
+                    promise.reject(err);
+                });
+            return promise;
+        }
+
         return factory;
     }
-
-]);
+})();
