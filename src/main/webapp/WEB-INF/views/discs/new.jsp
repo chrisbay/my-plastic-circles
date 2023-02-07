@@ -67,7 +67,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Create</button>
+                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus pe-2"></i>Create</button>
                     </sf:form>
 
                 </div>

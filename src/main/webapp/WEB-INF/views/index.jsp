@@ -12,7 +12,7 @@
             <div class="p-5 mb-4 bg-light rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-5 fw-bold">Your discs, organized</h1>
-                    <p class="col-md-8 fs-4">Keep track of your discs, all in one place</p>
+                    <p class="col-md-8 fs-4">Keep track of all your discs in one place</p>
                     <a class="btn btn-success btn-lg" href="/discs" role="button">Get Started</a>
                 </div>
             </div>

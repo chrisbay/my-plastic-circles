@@ -13,7 +13,7 @@
 
             <h1>My Collection</h1>
 
-            <a class="btn btn-primary" href="/discs/new">Add Disc</a>
+            <a class="btn btn-primary" href="/discs/new"><i class="fa-solid fa-plus pe-2"></i>Add Disc</a>
 
             <discs></discs>
 
