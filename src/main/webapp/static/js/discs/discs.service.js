@@ -5,8 +5,6 @@
         .module('discsApp')
         .factory('DiscService', DiscService);
 
-    DiscService.$inject = ['$http', '$q'];
-
     function DiscService($http, $q) {
         const REST_SERVICES_URL = 'http://localhost:8080/api';
 
