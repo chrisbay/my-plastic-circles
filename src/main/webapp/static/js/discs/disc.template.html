@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Flight Numbers</th>
+        <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="disc in this.discs">
+        <td>
+            <i ng-click="collection.toggleFavoriteStatus(disc)"
+               ng-class="disc.favorite ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+        </td>
+        <td>{{disc.manufacturer.name}}</td>
+        <td>{{disc.model}}</td>
+        <td>{{disc.speed}} / {{disc.glide}} / {{disc.turn}} / {{disc.fade}}</td>
+        <td>{{disc.notes}}</td>
+    </tr>
+    </tbody>
+</table>
