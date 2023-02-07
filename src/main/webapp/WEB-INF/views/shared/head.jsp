@@ -18,8 +18,18 @@
 <link rel="stylesheet" href="/webjars/font-awesome/6.2.1/css/all.min.css">
 
 <style>
-.form-error {
+.form-error,
+.required-msg {
     color: red;
     font-size: 0.9rem;
+}
+.required {
+	font-size: .5rem;
+	vertical-align: top;
+	color: red;
+	margin: 4px 2px;
+}
+.fa-solid.fa-star {
+    color: rgb(255,179,59);
 }
 </style>

@@ -16,10 +16,12 @@
 
                     <h1>New Manufacturer</h1>
 
+                    <p class="required-msg"><i class="fa-solid fa-asterisk required" title="Required"></i>Required</p>
+
                     <sf:form method="POST" modelAttribute="discManufacturer">
 
                         <div class="mb-3">
-                            <label class="form-label" for="name-input">Name</label>
+                            <label class="form-label" for="name-input">Name<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                             <sf:input path="name" id="name-input" class="form-control" />
                             <sf:errors path="name" cssClass="form-error" />
                         </div>

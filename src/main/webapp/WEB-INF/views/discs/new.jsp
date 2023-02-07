@@ -16,16 +16,18 @@
 
                     <h1>New Disc</h1>
 
+                    <p class="required-msg"><i class="fa-solid fa-asterisk required" title="Required"></i>Required</p>
+
                     <sf:form method="POST" modelAttribute="disc">
 
                         <div class="mb-3">
-                            <label class="form-label" for="model-input">Model</label>
+                            <label class="form-label" for="model-input">Model<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                             <sf:input path="model" id="model-input" class="form-control" />
                             <sf:errors path="model" cssClass="form-error" />
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="manufacturer-input">Manufacturer</label>
+                            <label class="form-label" for="manufacturer-input">Manufacturer<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                             <select name="manufacturerId" id="manufacturer-input" class="form-control">
                                 <c:forEach var="manufacturer" items="${manufacturers}">
                                     <option value="${manufacturer.id}"><c:out value="${manufacturer.name}" /></option>
@@ -37,22 +39,22 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-3">
-                                    <label class="form-label" for="speed-input">Speed</label>
+                                    <label class="form-label" for="speed-input">Speed<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                                     <sf:input path="speed" type="number" id="speed-input" class="form-control" />
                                     <sf:errors path="speed" cssClass="form-error" />
                                 </div>
                                 <div class="col-3">
-                                    <label class="form-label" for="glide-input">Glide</label>
+                                    <label class="form-label" for="glide-input">Glide<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                                     <sf:input path="glide" type="number" id="glide-input" class="form-control" />
                                     <sf:errors path="glide" cssClass="form-error" />
                                 </div>
                                 <div class="col-3">
-                                    <label class="form-label" for="turn-input">Turn</label>
+                                    <label class="form-label" for="turn-input">Turn<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                                     <sf:input path="turn" type="number" id="turn-input" class="form-control" />
                                     <sf:errors path="turn" cssClass="form-error" />
                                 </div>
                                 <div class="col-3">
-                                    <label class="form-label" for="fade-input">Fade</label>
+                                    <label class="form-label" for="fade-input">Fade<i class="fa-solid fa-asterisk required" title="Required"></i></label>
                                     <sf:input path="fade" type="number" id="fade-input" class="form-control" />
                                     <sf:errors path="fade" cssClass="form-error" />
                                 </div>

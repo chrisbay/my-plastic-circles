@@ -13,18 +13,22 @@ public class Disc extends AbstractEntity {
 
     private DiscManufacturer manufacturer;
 
+    @NotNull(message = "Required")
     @Min(value = 1, message = "Speed must be between 1 and 14")
     @Max(value = 14, message = "Speed must be between 1 and 14")
     private Integer speed;
 
+    @NotNull(message = "Required")
     @Min(value = 1, message = "Glide must be between 1 and 7")
     @Max(value = 7, message = "Glide must be between 1 and 7")
     private Integer glide;
 
+    @NotNull(message = "Required")
     @Min(value = -5, message = "Turn must be between -5 and 1")
     @Max(value = 1, message = "Turn must be between -5 and 1")
     private Integer turn;
 
+    @NotNull(message = "Required")
     @Min(value = 0, message = "Fade must be between 0 and 5")
     @Max(value = 5, message = "Fade must be between 0 and 5")
     private Integer fade;

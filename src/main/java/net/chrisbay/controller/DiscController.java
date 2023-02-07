@@ -39,10 +39,12 @@ public class DiscController {
     @PostMapping("new")
     public String processNewDiscForm (Model model,
                                       @Valid @ModelAttribute Disc disc,
-                                      @RequestParam Integer manufacturerId,
-                                      Errors errors) {
+                                      Errors errors,
+                                      @RequestParam Integer manufacturerId) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("pageTitle", "New Disc");
+            model.addAttribute("manufacturers", discManufacturerDao.getAll());
             return "discs/new";
         }
 
