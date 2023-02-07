@@ -11,6 +11,8 @@
 
         <main class="container-fluid">
 
+            <h1>Disc Manufacturers</h1>
+
             <a class="btn btn-primary" href="/manufacturers/new">Add Manufacturer</a>
 
             <table class="table table-striped">

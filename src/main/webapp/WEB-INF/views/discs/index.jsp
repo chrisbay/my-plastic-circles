@@ -11,6 +11,8 @@
 
         <main class="container-fluid">
 
+            <h1>My Collection</h1>
+
             <a class="btn btn-primary" href="/discs/new">Add Disc</a>
 
             <discs></discs>

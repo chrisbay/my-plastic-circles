@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th></th>
+        <td></td>
         <th>Manufacturer</th>
         <th>Model</th>
         <th>Flight Numbers</th>
@@ -12,7 +12,8 @@
     <tr ng-repeat="disc in discs">
         <td>
             <i ng-click="$ctrl.toggleFavoriteStatus(disc)"
-               ng-class="disc.favorite ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+               ng-class="disc.favorite ? 'fa-solid fa-star' : 'fa-regular fa-star'"
+               title="{{ disc.favorite ? 'Remove from favorites' : 'Add to favorites'}}"></i>
         </td>
         <td>{{disc.manufacturer.name}}</td>
         <td>{{disc.model}}</td>
