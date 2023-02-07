@@ -43,8 +43,8 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="/static/js/app.js"></script>
-        <script src="/static/js/services/DiscService.js"></script>
-        <script src="/static/js/controllers/DiscController.js"></script>
+        <script src="/static/js/disc/disc.service.js"></script>
+        <script src="/static/js/disc/disc.controller.js"></script>
 
     </body>
 </html>
