@@ -28,11 +28,9 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="manufacturer-input">Manufacturer<i class="fa-solid fa-asterisk required" title="Required"></i></label>
-                            <select name="manufacturerId" id="manufacturer-input" class="form-control">
-                                <c:forEach var="manufacturer" items="${manufacturers}">
-                                    <option value="${manufacturer.id}"><c:out value="${manufacturer.name}" /></option>
-                                </c:forEach>
-                            </select>
+                            <sf:select path="manufacturer" id="manufacturer-input" class="form-control">
+                                <sf:options items="${manufacturers}" itemLabel="name" itemValue="id"></sf:options>
+                            </sf:select>
                             <sf:errors path="manufacturer" cssClass="form-error" />
                         </div>
 

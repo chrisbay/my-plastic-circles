@@ -1,26 +1,25 @@
 package net.chrisbay.controller;
 
-import net.chrisbay.dao.DiscDao;
 import net.chrisbay.model.Disc;
+import net.chrisbay.service.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.annotation.Repeatable;
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("api")
 public class DiscRestController {
 
     @Autowired
-    private DiscDao discDao;
+    private EntityService<Disc> discService;
 
     @GetMapping("disc")
     public ResponseEntity<Collection<Disc>> getAllDiscs () {
-        Collection<Disc> discs = discDao.getAll();
+        List<Disc> discs = discService.getAll();
         if (discs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -29,12 +28,14 @@ public class DiscRestController {
 
     @PutMapping("disc/{id}")
     public ResponseEntity<Disc> updateDisc(@PathVariable Integer id, @RequestBody Disc disc) {
-        Optional<Disc> currentDiscRes = discDao.get(id);
-        if (!currentDiscRes.isPresent()) {
+        Disc currentDisc = discService.get(id);
+        if (currentDisc == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        discDao.save(disc);
+        discService.save(disc);
         return new ResponseEntity<>(disc, HttpStatus.OK);
     }
+
+
 
 }

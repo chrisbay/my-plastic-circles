@@ -1,19 +1,23 @@
 package net.chrisbay.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
+@MappedSuperclass
 public abstract class AbstractEntity {
 
-    private final Integer id;
-    private static Integer nextId = 1;
-
-    AbstractEntity () {
-        this.id = nextId;
-        nextId++;
-    }
+    @Id
+    @GeneratedValue
+    private Integer id;
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

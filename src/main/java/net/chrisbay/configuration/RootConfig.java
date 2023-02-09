@@ -1,5 +1,6 @@
 package net.chrisbay.configuration;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -25,6 +27,7 @@ public class RootConfig {
     public DataSource dataSource () {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
+                .setName("testdb;DATABASE_TO_UPPER=false;MODE=Oracle")
                 .build();
     }
 
@@ -44,6 +47,13 @@ public class RootConfig {
         sfb.setPackagesToScan("net.chrisbay.model");
         sfb.setHibernateProperties(hibernateProperties());
         return sfb;
+    }
+
+    @Bean
+    public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
+        return transactionManager;
     }
 
 }

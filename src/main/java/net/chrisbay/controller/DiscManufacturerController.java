@@ -1,7 +1,8 @@
 package net.chrisbay.controller;
 
-import net.chrisbay.dao.DiscManufacturerDao;
 import net.chrisbay.model.DiscManufacturer;
+import net.chrisbay.service.DiscManufacturerService;
+import net.chrisbay.service.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,12 @@ import javax.validation.Valid;
 public class DiscManufacturerController {
 
     @Autowired
-    private DiscManufacturerDao discManufacturerDao;
+    private EntityService<DiscManufacturer> discManufacturerService;
 
     @GetMapping
     public String displayAllManufacturers (Model model) {
         model.addAttribute("pageTitle", "All Manufacturers");
-        model.addAttribute("manufacturers", discManufacturerDao.getAll());
+        model.addAttribute("manufacturers", discManufacturerService.getAll());
         return "manufacturers/index";
     }
 
@@ -43,7 +44,7 @@ public class DiscManufacturerController {
             return "manufacturers/new";
         }
 
-        discManufacturerDao.save(discManufacturer);
+        discManufacturerService.save(discManufacturer);
 
         return "redirect:";
     }

@@ -1,8 +1,10 @@
 package net.chrisbay.model;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class DiscManufacturer extends AbstractEntity {
 
     @NotNull

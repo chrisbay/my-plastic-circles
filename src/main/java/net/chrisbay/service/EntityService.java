@@ -1,8 +1,8 @@
-package net.chrisbay.dao;
+package net.chrisbay.service;
 
 import java.util.List;
 
-public interface Dao<T> {
+public interface EntityService<T> {
 
     T get(Integer id);
 

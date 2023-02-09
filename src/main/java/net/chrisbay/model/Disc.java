@@ -1,16 +1,21 @@
 package net.chrisbay.model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Disc extends AbstractEntity {
 
     @NotNull
     @Size(min=2, max=50, message = "Model must be between 2 and 50 characters")
     private String model;
 
+    @ManyToOne
+    @NotNull(message = "Manufacturer is required")
     private DiscManufacturer manufacturer;
 
     @NotNull(message = "Required")
