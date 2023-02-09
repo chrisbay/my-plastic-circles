@@ -22,17 +22,15 @@ public class DiscManufacturerDao implements Dao<DiscManufacturer> {
     @Override
     public DiscManufacturer get(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(DiscManufacturer.class, id);
+        Query query = session.createQuery("from DiscManufacturer where id= :id");
+        query.setParameter("id", id);
+        return (DiscManufacturer) query.getSingleResult();
     }
 
     @Override
     public List<DiscManufacturer> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<DiscManufacturer> cq = cb.createQuery(DiscManufacturer.class);
-        Root<DiscManufacturer> root = cq.from(DiscManufacturer.class);
-        cq.select(root);
-        Query query = session.createQuery(cq);
+        Query query = session.createQuery("from DiscManufacturer");
         return query.getResultList();
     }
 
@@ -46,8 +44,15 @@ public class DiscManufacturerDao implements Dao<DiscManufacturer> {
     @Override
     public DiscManufacturer delete(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        DiscManufacturer discManufacturer = session.byId(DiscManufacturer.class).load(id);
-        session.delete(discManufacturer);
+
+        Query query = session.createQuery("from DiscManufacturer where id= :id");
+        query.setParameter("id", id);
+        DiscManufacturer discManufacturer = (DiscManufacturer) query.getSingleResult();
+
+        query = session.createQuery("delete from DiscManufacturer where id= :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+
         return discManufacturer;
     }
 }
