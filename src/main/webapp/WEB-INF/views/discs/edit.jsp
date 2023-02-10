@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,7 +15,7 @@
             <div class="row justify-content-center">
                 <div class="col-6">
 
-                    <h1>New Disc</h1>
+                    <h1><c:out value="${isNew ? 'New Disc' : 'Edit Disc'}" /></h1>
 
                     <p class="required-msg"><i class="fa-solid fa-asterisk required" title="Required"></i>Required</p>
 
@@ -67,7 +68,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus pe-2"></i>Create</button>
+                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus pe-2"></i><c:out value="${isNew ? 'Create' : 'Save'}" /></button>
                     </sf:form>
 
                 </div>

@@ -6,6 +6,7 @@
         <th>Model</th>
         <th>Flight Numbers</th>
         <th>Notes</th>
+        <td></td>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
         <td>{{disc.model}}</td>
         <td>{{disc.speed}} / {{disc.glide}} / {{disc.turn}} / {{disc.fade}}</td>
         <td>{{disc.notes}}</td>
+        <td><a ng-href="/discs/edit/{{disc.id}}"><i class="fa-solid fa-pen-to-square" title="Edit disc"></i></a></td>
     </tr>
     </tbody>
 </table>

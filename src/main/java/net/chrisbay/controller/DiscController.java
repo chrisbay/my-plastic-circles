@@ -30,28 +30,41 @@ public class DiscController {
         return "discs/index";
     }
 
-    @GetMapping("new")
-    public String displayNewDiscForm (Model model) {
-        model.addAttribute("pageTitle", "New Disc");
+    @GetMapping("edit/{id}")
+    public String displayEditDiscForm (Model model, @PathVariable Integer id) {
+
+        if (id == 0) {
+            model.addAttribute("isNew", true);
+            model.addAttribute("disc", new Disc());
+        } else {
+            model.addAttribute("isNew", false);
+            model.addAttribute("disc", discService.get(id));
+        }
+
         model.addAttribute("manufacturers", discManufacturerService.getAll());
-        model.addAttribute("disc", new Disc());
-        return "discs/new";
+
+        return "discs/edit";
     }
 
-    @PostMapping("new")
-    public String processNewDiscForm (Model model,
+    @PostMapping("edit/{id}")
+    public String processEditDiscForm (Model model,
                                       @Valid @ModelAttribute Disc disc,
-                                      Errors errors) {
+                                      Errors errors,
+                                      @PathVariable Integer id) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("pageTitle", "New Disc");
+            model.addAttribute("isNew", true);
             model.addAttribute("manufacturers", discManufacturerService.getAll());
-            return "discs/new";
+            return "discs/edit";
+        }
+
+        if (id == 0) {
+            disc.setId(null);
         }
 
         discService.save(disc);
 
-        return "redirect:";
+        return "redirect:/discs";
     }
 
     @InitBinder
