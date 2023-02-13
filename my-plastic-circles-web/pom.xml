@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.chrisbay</groupId>
-    <artifactId>my-plastic-circles</artifactId>
+    <artifactId>my-plastic-circles-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
