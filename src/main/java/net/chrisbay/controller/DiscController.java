@@ -67,6 +67,12 @@ public class DiscController {
         return "redirect:/discs";
     }
 
+    @PostMapping("delete/{id}")
+    public String deleteDisc(@PathVariable Integer id) {
+        discService.delete(id);
+        return "redirect:/discs";
+    }
+
     @InitBinder
     protected void InitBinder (WebDataBinder binder) {
         binder.registerCustomEditor(DiscManufacturer.class, new DiscManufacturerEditor(discManufacturerService));

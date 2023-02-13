@@ -19,7 +19,7 @@
 
                     <p class="required-msg"><i class="fa-solid fa-asterisk required" title="Required"></i>Required</p>
 
-                    <sf:form method="POST" modelAttribute="disc">
+                    <sf:form method="POST" modelAttribute="disc" class="mb-4">
 
                         <div class="mb-3">
                             <label class="form-label" for="model-input">Model<i class="fa-solid fa-asterisk required" title="Required"></i></label>
@@ -70,6 +70,41 @@
 
                         <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus pe-2"></i><c:out value="${isNew ? 'Create' : 'Save'}" /></button>
                     </sf:form>
+
+                    <script>
+                        window.addEventListener("load", function(){
+                            function deleteDisc() {
+                                const form = document.getElementById("delete-form");
+                                form.submit();
+                            }
+
+                            const deleteBtn = document.getElementById("confirmDeleteButton");
+                            deleteBtn.addEventListener("click", deleteDisc);
+                        });
+                    </script>
+
+                    <form id="delete-form" action="/discs/delete/${disc.id}" method="POST" class="mb-4">
+                        <input type="hidden" value="${disc.id}" />
+                        <a href="#" id="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete disc</a>
+                    </form>
+
+                    <div class="modal" tabindex="-1" id="confirmDeleteModal">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Confirm delete</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>This action can not be undone.</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                 </div>
             </div>

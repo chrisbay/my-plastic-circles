@@ -19,7 +19,8 @@
 
 <style>
 .form-error,
-.required-msg {
+.required-msg,
+#delete-link {
     color: red;
     font-size: 0.9rem;
 }
