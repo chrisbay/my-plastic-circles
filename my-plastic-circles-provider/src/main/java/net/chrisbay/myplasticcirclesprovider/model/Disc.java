@@ -119,4 +119,16 @@ public class Disc extends AbstractEntity {
     public void setFavorite(Boolean favorite) {
         isFavorite = favorite;
     }
+
+    public static Disc mergeDiscs(Disc source, Disc target) {
+        target.setModel(source.getModel());
+        target.setManufacturer(source.getManufacturer());
+        target.setSpeed(source.getSpeed());
+        target.setGlide(source.getGlide());
+        target.setTurn(source.getTurn());
+        target.setFade(source.getFade());
+        target.setFavorite(source.getFavorite());
+        target.setNotes(source.getNotes());
+        return target;
+    }
 }
