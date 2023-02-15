@@ -18,9 +18,9 @@ public class DiscRestController {
     private EntityService<Disc> discService;
 
     @GetMapping("disc")
-    public ResponseEntity<Collection<Disc>> getAllDiscs () {
-        List<Disc> discs = discService.getAll();
-        if (discs.isEmpty()) {
+    public ResponseEntity<Disc[]> getAllDiscs () {
+        Disc[] discs = discService.getAll();
+        if (discs.length == 0) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(discs, HttpStatus.OK);

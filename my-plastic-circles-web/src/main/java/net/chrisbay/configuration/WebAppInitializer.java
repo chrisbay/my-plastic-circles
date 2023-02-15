@@ -2,6 +2,8 @@ package net.chrisbay.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 
@@ -20,4 +22,9 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[] { "/" };
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        Filter [] singleton = { new CorsFilter()};
+        return singleton;
+    }
 }

@@ -39,7 +39,7 @@ public class DiscController {
 
         validateDisc(disc, errors);
 
-        return discRepository.findById(disc.getId()).get();
+        return discRepository.save(disc);
     }
 
     @GetMapping("{id}")
