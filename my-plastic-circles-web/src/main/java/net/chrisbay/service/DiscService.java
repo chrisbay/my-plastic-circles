@@ -1,13 +1,11 @@
 package net.chrisbay.service;
 
-import net.chrisbay.dao.DiscDao;
 import net.chrisbay.model.Disc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Transactional
@@ -17,9 +15,6 @@ public class DiscService implements EntityService<Disc> {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    @Autowired
-    private DiscDao dao;
 
     @Override
     public Disc get(Integer id) {

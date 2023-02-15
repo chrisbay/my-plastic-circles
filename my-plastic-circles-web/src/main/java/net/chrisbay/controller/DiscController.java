@@ -53,7 +53,7 @@ public class DiscController {
                                       @PathVariable Integer id) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("isNew", true);
+            model.addAttribute("isNew", id == 0);
             model.addAttribute("manufacturers", discManufacturerService.getAll());
             return "discs/edit";
         }
