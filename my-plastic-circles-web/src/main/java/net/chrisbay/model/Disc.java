@@ -117,4 +117,12 @@ public class Disc extends AbstractEntity {
     public void setFavorite(Boolean favorite) {
         isFavorite = favorite;
     }
+
+    public String getDisplayName() {
+        return this.getModel() + " (" + this.getManufacturer().getName() + " - " + this.getDisplayFlightNumbers() + ")";
+    }
+
+    public String getDisplayFlightNumbers() {
+        return "" + this.getSpeed() + " / " + this.getGlide() + " / " + this.getTurn() + " / " + this.getFade();
+    }
 }

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary shadow-sm mb-4">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">My Plastic Circles</a>
@@ -13,3 +15,14 @@
         </div>
     </div>
 </nav>
+
+<c:if test="${message != null}">
+    <div class="container-fluid">
+        <c:set var="parts" value="${fn:split(message,'|')}" />
+        <c:set var="className" value="alert alert-dismissible fade show alert-${parts[0]}" />
+        <div class="${className}" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            ${parts[1]}
+        </div>
+    </div>
+</c:if>

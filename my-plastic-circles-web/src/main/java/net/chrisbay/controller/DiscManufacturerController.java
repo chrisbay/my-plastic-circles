@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -38,15 +40,18 @@ public class DiscManufacturerController {
     @PostMapping("new")
     public String processNewManufacturerForm (Model model,
                                               @Valid @ModelAttribute DiscManufacturer discManufacturer,
-                                              Errors errors) {
+                                              Errors errors,
+                                              RedirectAttributes redirectAttributes) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("message", "danger|Please correct the validation errors below");
             return "manufacturers/new";
         }
 
         discManufacturerService.save(discManufacturer);
+        redirectAttributes.addFlashAttribute("message", "success|<b>" + discManufacturer.getName() + "</b> saved!");
 
-        return "redirect:";
+        return "redirect:/manufacturers";
     }
 
 }
