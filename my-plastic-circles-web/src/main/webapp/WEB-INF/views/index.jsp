@@ -13,7 +13,7 @@
                 <div class="container-fluid py-5">
                     <h1 class="display-5 fw-bold">Your discs, organized</h1>
                     <p class="col-md-8 fs-4">Keep track of all your discs in one place</p>
-                    <a class="btn btn-success btn-lg" href="/discs" role="button">Get Started</a>
+                    <a id="get-started" class="btn btn-success btn-lg" href="/discs" role="button">Get Started</a>
                 </div>
             </div>
         </main>

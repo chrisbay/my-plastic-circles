@@ -17,6 +17,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.h2database:h2'
 	implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
+	implementation 'org.seleniumhq.selenium:selenium-java'
+	implementation 'org.seleniumhq.selenium:selenium-firefox-driver'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testng:testng:6.14.3'
