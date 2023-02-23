@@ -40,7 +40,7 @@ public class DiscController {
             model.addAttribute("pageTitle", "New Disc");
         } else {
             model.addAttribute("isNew", false);
-            model.addAttribute("pageTitle", "Save Disc");
+            model.addAttribute("pageTitle", "Edit Disc");
             Disc disc = discService.get(id);
 
             if (disc == null) {

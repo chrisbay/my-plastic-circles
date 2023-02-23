@@ -26,9 +26,7 @@ public class DiscCreateFormPageTest extends AbstractUITest {
 
     @BeforeMethod
     public void loadPage() {
-        driver.get("http://localhost:8080/discs/edit/0");
-        this.page = new DiscFormPage(driver, 0);
-        PageFactory.initElements(driver, this.page);
+        this.page = DiscFormPage.loadCreateDiscPage(driver);
     }
 
     @Test
@@ -43,14 +41,12 @@ public class DiscCreateFormPageTest extends AbstractUITest {
         DiscsPage discsPage = this.page.fillAndSubmitForm(testModel, testManufacturer, testSpeed, testGlide, testTurn, testFade, testNotes);
 
         List<WebElement> tableRows = discsPage.getRows();
-        WebElement lastRow = tableRows.get(tableRows.size() - 1);
+        Integer rowIdx = tableRows.size() - 1;
 
-        List<WebElement> rowData = lastRow.findElements(By.tagName("td"));
-
-        assertEquals(testManufacturer, rowData.get(1).getText());
-        assertEquals(testModel, rowData.get(2).getText());
-        assertEquals(testSpeed + " / " + testGlide + " / " + testTurn + " / " + testFade, rowData.get(3).getText());
-        assertEquals(testNotes, rowData.get(4).getText());
+        assertEquals(testManufacturer, discsPage.getFieldText(rowIdx, "manufacturer"));
+        assertEquals(testModel, discsPage.getFieldText(rowIdx, "model"));
+        assertEquals(testSpeed + " / " + testGlide + " / " + testTurn + " / " + testFade, discsPage.getFieldText(rowIdx, "flightNumbers"));
+        assertEquals(testNotes, discsPage.getFieldText(rowIdx, "notes"));
     }
 
     @Test
@@ -59,14 +55,12 @@ public class DiscCreateFormPageTest extends AbstractUITest {
         DiscsPage discsPage = this.page.fillAndSubmitForm(testModel, testManufacturer, testSpeed, testGlide, testTurn, testFade, "");
 
         List<WebElement> tableRows = discsPage.getRows();
-        WebElement lastRow = tableRows.get(tableRows.size() - 1);
+        Integer rowIdx = tableRows.size() - 1;
 
-        List<WebElement> rowData = lastRow.findElements(By.tagName("td"));
-
-        assertEquals(testManufacturer, rowData.get(1).getText());
-        assertEquals(testModel, rowData.get(2).getText());
-        assertEquals(testSpeed + " / " + testGlide + " / " + testTurn + " / " + testFade, rowData.get(3).getText());
-        assertEquals("", rowData.get(4).getText());
+        assertEquals(testManufacturer, discsPage.getFieldText(rowIdx, "manufacturer"));
+        assertEquals(testModel, discsPage.getFieldText(rowIdx, "model"));
+        assertEquals(testSpeed + " / " + testGlide + " / " + testTurn + " / " + testFade, discsPage.getFieldText(rowIdx, "flightNumbers"));
+        assertEquals("", discsPage.getFieldText(rowIdx, "notes"));
     }
 
 

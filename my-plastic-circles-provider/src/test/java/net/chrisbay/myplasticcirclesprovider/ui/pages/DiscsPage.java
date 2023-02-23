@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DiscsPage extends AbstractPage {
 
@@ -42,12 +44,7 @@ public class DiscsPage extends AbstractPage {
     }
 
     private WebElement getFavoriteStar(Integer idx) {
-        if (idx < 0 || idx > this.rows.size()) {
-            throw new IllegalArgumentException("Attempting to access item with index ["
-                    + idx + "] in the table. Table has " + this.rows.size() + "rows");
-        }
-
-        WebElement row = this.rows.get(idx);
+        WebElement row = this.getRow(idx);
         return row.findElement(By.cssSelector("i.fa-star"));
     }
 
@@ -69,5 +66,37 @@ public class DiscsPage extends AbstractPage {
 
     public void clickAddDiscBtn() {
         this.addDiscsBtn.click();
+    }
+
+    public String getDiscEditURL(Integer idx) {
+        WebElement row = this.getRow(idx);
+        List<WebElement> rowData = row.findElements(By.tagName("td"));
+        return rowData.get(5).findElement(By.tagName("a")).getDomAttribute("href");
+    }
+
+    public String getFieldText(Integer rowIdx, String column) {
+        WebElement row = this.getRow(rowIdx);
+        List<WebElement> rowData = row.findElements(By.tagName("td"));
+
+        if (column.equals("manufacturer")) {
+            return rowData.get(1).getText();
+        } else if (column.equals("model")) {
+            return rowData.get(2).getText();
+        } else if (column.equals("flightNumbers")) {
+            return rowData.get(3).getText();
+        } else if (column.equals("notes")) {
+            return rowData.get(4).getText();
+        }
+
+        throw new IllegalArgumentException("Invalid column");
+    }
+
+    private WebElement getRow(Integer idx) {
+        if (idx < 0 || idx > this.rows.size()) {
+            throw new IllegalArgumentException("Attempting to access item with index ["
+                    + idx + "] in the table. Table has " + this.rows.size() + "rows");
+        }
+
+        return this.rows.get(idx);
     }
 }
