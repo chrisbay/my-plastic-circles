@@ -8,10 +8,12 @@ public abstract class AbstractPage {
 
     protected WebDriver driver;
     public static final String BASE_URL = "http://localhost:8080";
-    private final String pageUrl;
+    protected String pageUrl;
 
     @FindBy(css = "h1")
     private WebElement pageHeadingElement;
+
+    public AbstractPage() {}
 
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
