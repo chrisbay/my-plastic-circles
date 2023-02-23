@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DiscFormPage extends AbstractPage {
+public class DiscFormPage extends AbstractFormPage {
 
     private final String pageName;
     private String pagePath;
@@ -127,17 +127,6 @@ public class DiscFormPage extends AbstractPage {
 
     public Select getManufacturerSelectElement() {
         return new Select(manufacturerField);
-    }
-
-    public String getFieldErrorMessage(String fieldName) {
-        WebElement errorElement;
-        try {
-            errorElement = driver.findElement(By.id(fieldName + ".errors"));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
-
-        return errorElement.getText();
     }
 
     public Map<String, String> getFormValues() {

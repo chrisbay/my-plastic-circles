@@ -57,7 +57,7 @@ public class DiscEditFormPageTest extends AbstractUITest {
         DiscsPage discsPage = this.page.fillNotesFieldAndSubmitForm(newNotes);
 
         List<WebElement> tableRows = discsPage.getRows();
-        WebElement firstRow = tableRows.get(0);
+        WebElement firstRow = tableRows.get(tableRows.size() - 1);
 
         List<WebElement> rowData = firstRow.findElements(By.tagName("td"));
 

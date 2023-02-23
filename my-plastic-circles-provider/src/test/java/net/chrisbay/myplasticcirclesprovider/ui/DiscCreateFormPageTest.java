@@ -67,7 +67,7 @@ public class DiscCreateFormPageTest extends AbstractUITest {
     @Test
     public void verifyValidationErrorsAreDisplayed() {
         try {
-            DiscsPage discsPage = this.page.fillAndSubmitForm("", "Discraft", "", "", "", "", "");
+            this.page.fillAndSubmitForm("", "Discraft", "", "", "", "", "");
             throw new IllegalStateException("Form submission should throw an exception");
         } catch (Exception e) {
             // do nothing
