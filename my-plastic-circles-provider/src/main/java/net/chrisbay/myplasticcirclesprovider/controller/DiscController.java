@@ -1,17 +1,16 @@
 package net.chrisbay.myplasticcirclesprovider.controller;
 
-import net.chrisbay.myplasticcirclesprovider.controller.exception.ResourceDoesNotExist;
-import net.chrisbay.myplasticcirclesprovider.controller.exception.ValidationException;
+import net.chrisbay.myplasticcirclesprovider.exception.ResourceDoesNotExistException;
+import net.chrisbay.myplasticcirclesprovider.exception.ValidationException;
 import net.chrisbay.myplasticcirclesprovider.model.Disc;
 import net.chrisbay.myplasticcirclesprovider.model.DiscManufacturer;
 import net.chrisbay.myplasticcirclesprovider.repository.DiscManufacturerRepository;
-import net.chrisbay.myplasticcirclesprovider.repository.DiscRepository;
+import net.chrisbay.myplasticcirclesprovider.service.DiscService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 public class DiscController {
 
     @Autowired
-    DiscRepository discRepository;
+    DiscService discService;
 
     @Autowired
     DiscManufacturerRepository discManufacturerRepository;
@@ -30,58 +29,37 @@ public class DiscController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Disc> getAll() {
-        return discRepository.findAll();
+        return discService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Disc create(@RequestBody @Valid Disc disc, Errors errors) {
-
         validateDisc(disc, errors);
-
-        return discRepository.save(disc);
+        discService.save(disc);
+        return disc;
     }
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public Disc getById(@PathVariable Integer id) {
-
-        Optional<Disc> optionalDisc = discRepository.findById(id);
-
-        if (!optionalDisc.isPresent()) {
-            throw new ResourceDoesNotExist("Disc", id);
-        }
-
-        return optionalDisc.get();
+        return discService.get(id);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public Disc updateDisc(@PathVariable Integer id, @RequestBody @Valid Disc discData, Errors errors) {
-        Optional<Disc> optionalDisc = discRepository.findById(id);
-
-        if (!optionalDisc.isPresent()) {
-            throw new ResourceDoesNotExist("Disc", id);
-        }
-
         validateDisc(discData, errors);
-
-        Disc disc = optionalDisc.get();
+        Disc disc = discService.get(id);
         Disc.mergeDiscs(discData, disc);
-        return discRepository.save(disc);
+        discService.save(disc);
+        return disc;
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDisc(@PathVariable Integer id) {
-
-        Optional<Disc> optionalDisc = discRepository.findById(id);
-
-        if (!optionalDisc.isPresent()) {
-            throw new ResourceDoesNotExist("Disc", id);
-        }
-
-        discRepository.deleteById(id);
+        discService.delete(id);
     }
 
     private void validateDisc (Disc disc, Errors errors) {
@@ -94,7 +72,7 @@ public class DiscController {
         Optional<DiscManufacturer> manufacturerOptional = discManufacturerRepository.findById(disc.getManufacturer().getId());
 
         if (!manufacturerOptional.isPresent()) {
-            throw new ResourceDoesNotExist("DiscManufacturer", disc.getManufacturer().getId());
+            throw new ResourceDoesNotExistException("DiscManufacturer", disc.getManufacturer().getId());
         }
     }
 }

@@ -1,4 +1,4 @@
-package net.chrisbay.myplasticcirclesprovider.controller.exception;
+package net.chrisbay.myplasticcirclesprovider.exception;
 
 public class ValidationException extends RuntimeException {
 

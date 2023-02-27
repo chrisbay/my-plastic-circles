@@ -13,9 +13,9 @@
 
             <h1>My Collection</h1>
 
-            <a class="btn btn-primary" href="/discs/edit/0"><i class="fa-solid fa-plus pe-2"></i>Add Disc</a>
+            <a id="add-disc-btn" class="btn btn-primary" href="/discs/edit/0"><i class="fa-solid fa-plus pe-2"></i>Add Disc</a>
 
-            <discs></discs>
+            <discs id="discs-table"></discs>
 
         </main>
 

@@ -13,9 +13,9 @@
 
             <h1>Disc Manufacturers</h1>
 
-            <a class="btn btn-primary" href="/manufacturers/new"><i class="fa-solid fa-plus pe-2"></i>Add Manufacturer</a>
+            <a id="add-manufacturer-btn" class="btn btn-primary" href="/manufacturers/new"><i class="fa-solid fa-plus pe-2"></i>Add Manufacturer</a>
 
-            <table class="table table-striped">
+            <table id="manufacturers-table" class="table table-striped">
                 <thead>
                     <tr>
                         <th><c:out value="Name" /></th>
