@@ -1,6 +1,5 @@
 package net.chrisbay.myplasticcirclesprovider.service;
 
-import net.chrisbay.myplasticcirclesprovider.RepositoryMocksConfig;
 import net.chrisbay.myplasticcirclesprovider.exception.ResourceDoesNotExistException;
 import net.chrisbay.myplasticcirclesprovider.model.Disc;
 import net.chrisbay.myplasticcirclesprovider.model.DiscManufacturer;

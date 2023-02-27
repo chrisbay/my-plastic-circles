@@ -1,4 +1,4 @@
-package net.chrisbay.myplasticcirclesprovider;
+package net.chrisbay.myplasticcirclesprovider.service;
 
 import net.chrisbay.myplasticcirclesprovider.repository.DiscManufacturerRepository;
 import net.chrisbay.myplasticcirclesprovider.repository.DiscRepository;
