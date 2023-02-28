@@ -20,6 +20,18 @@ export class ManufacturersService {
     );
   }
 
+  save(manufacturer: Manufacturer): Observable<Manufacturer> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.post<Manufacturer>(this.manufacturersUrl, manufacturer, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
