@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
-@SpringBootTest(classes = { RepositoryMocksConfig.class, DiscRepository.class, DiscService.class })
+@SpringBootTest(classes = { RepositoryMocksConfig.class, DiscService.class })
 public class DiscServiceTest extends AbstractTestNGSpringContextTests {
 
 

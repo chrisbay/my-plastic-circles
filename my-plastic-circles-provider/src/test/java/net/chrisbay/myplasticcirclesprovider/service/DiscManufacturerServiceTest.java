@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
-@SpringBootTest(classes = { RepositoryMocksConfig.class, DiscManufacturerService.class, DiscManufacturerRepository.class})
+@SpringBootTest(classes = { RepositoryMocksConfig.class, DiscManufacturerService.class })
 public class DiscManufacturerServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
