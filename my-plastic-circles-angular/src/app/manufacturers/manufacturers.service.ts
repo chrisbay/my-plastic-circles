@@ -2,32 +2,22 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-import { Disc } from "./disc";
+import { Manufacturer } from "./manufacturer";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiscsService {
+export class ManufacturersService {
 
-  private discsUrl: string = 'http://localhost:8081/api/disc';
+  private manufacturersUrl: string = 'http://localhost:8081/api/manufacturer';
 
   constructor(private http: HttpClient) {}
 
-  getDiscs(): Observable<Disc[]> {
-    return this.http.get<Disc[]>(this.discsUrl)
+  getManufacturers(): Observable<Manufacturer[]> {
+    return this.http.get<Manufacturer[]>(this.manufacturersUrl)
     .pipe(
         catchError(this.handleError)
     );
-  }
-
-  toggleFavoriteStatus(disc: Disc): Observable<Disc> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.discsUrl}/${disc.id}`;
-    return this.http.put<Disc>(url, disc, { headers })
-      .pipe(
-        map(() => disc),
-        catchError(this.handleError)
-      );
   }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
