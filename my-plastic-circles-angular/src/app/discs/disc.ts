@@ -11,3 +11,8 @@ export interface Disc {
   notes: string;
   favorite: boolean;
 }
+
+export interface DiscResolved {
+  disc: Disc | null;
+  error?: string;
+}

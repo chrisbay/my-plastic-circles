@@ -1,5 +1,6 @@
 package net.chrisbay.myplasticcirclesprovider.ui;
 
+import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.HomePage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +14,7 @@ public class HomePageTest extends AbstractUITest {
 
     @BeforeMethod
     public void loadPage() {
-        driver.get("http://localhost:8080");
+        driver.get(AbstractPage.BASE_URL);
         this.page = PageFactory.initElements(driver, HomePage.class);
     }
 
@@ -21,7 +22,7 @@ public class HomePageTest extends AbstractUITest {
     public void verifyHomePageLoads() {
         assertEquals("Get Started", page.getGetStartedBtnText());
         page.clickGetStartedBtn();
-        assertEquals("http://localhost:8080/discs", driver.getCurrentUrl());
+        assertEquals(AbstractPage.BASE_URL + "/discs", driver.getCurrentUrl());
     }
 
 }

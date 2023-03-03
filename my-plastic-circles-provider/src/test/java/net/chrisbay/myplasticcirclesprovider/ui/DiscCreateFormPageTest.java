@@ -1,5 +1,6 @@
 package net.chrisbay.myplasticcirclesprovider.ui;
 
+import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscFormPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscsPage;
 import org.openqa.selenium.By;
@@ -66,14 +67,10 @@ public class DiscCreateFormPageTest extends AbstractUITest {
 
     @Test
     public void verifyValidationErrorsAreDisplayed() {
-        try {
-            this.page.fillAndSubmitForm("", "Discraft", "", "", "", "", "");
-            throw new IllegalStateException("Form submission should throw an exception");
-        } catch (Exception e) {
-            // do nothing
-        }
+        this.page.fillForm("a", "Discraft", "", "", "", "", "");
 
-        assertEquals("http://localhost:8080/discs/edit/0", driver.getCurrentUrl());
+        this.page.waitForDelayedModelError();
+
         assertNotNull(page.getFieldErrorMessage("model"));
         assertNotNull(page.getFieldErrorMessage("speed"));
         assertNotNull(page.getFieldErrorMessage("glide"));

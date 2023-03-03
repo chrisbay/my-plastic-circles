@@ -14,7 +14,7 @@ export class ManufacturersListComponent implements OnInit {
 
   ngOnInit() {
     this.manufacturersService.getManufacturers().subscribe({
-      next: discs => this.manufacturers = discs,
+      next: data => this.manufacturers = data,
       error: err => this.errorMessage = err
     });
   }

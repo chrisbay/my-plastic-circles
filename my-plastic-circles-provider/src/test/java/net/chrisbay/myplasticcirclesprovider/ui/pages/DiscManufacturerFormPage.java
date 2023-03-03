@@ -1,5 +1,6 @@
 package net.chrisbay.myplasticcirclesprovider.ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,20 +16,29 @@ public class DiscManufacturerFormPage extends AbstractFormPage {
         PAGE_PATH = "/manufacturers/new";
     }
 
-    @FindBy(name = "name")
+    @FindBy(id = "name-input")
     private WebElement nameField;
 
-    @FindBy(css = "form button[type=submit]")
-    private WebElement submitBtn;
+    @FindBy(id = "manufacturer-form")
+    private WebElement form;
 
     public DiscManufacturerFormPage(WebDriver driver) {
         super(driver);
     }
 
     public DiscManufacturersPage fillAndSubmitForm(String name) {
-        this.nameField.sendKeys(name);
-        this.submitBtn.click();
+        this.fillNameField(name);
+        this.form.submit();
+        this.driver.findElement(By.id("manufacturers-table"));
         return PageFactory.initElements(driver, DiscManufacturersPage.class);
+    }
+
+    public void fillNameField(String name) {
+        this.nameField.sendKeys(name);
+    }
+
+    public void waitForDelayedNameError() {
+        this.driver.findElement(By.id("name.errors"));
     }
 
     @Override

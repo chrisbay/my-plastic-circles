@@ -7,7 +7,9 @@
 
           <p class="required-msg"><i class="fa-solid fa-asterisk required" title="Required"></i>Required</p>
 
-          <form novalidate
+          <form 
+            id="manufacturer-form"
+            novalidate
             (ngSubmit)="onSubmit()"
             [formGroup]="manufacturerForm">
 
@@ -18,7 +20,7 @@
                     id="name-input" 
                     class="form-control"
                     [ngClass]="{'is-invalid': nameMessage}" />
-                  <div *ngIf="manufacturerForm.get('name')?.errors" class="form-error mt-2">
+                  <div *ngIf="manufacturerForm.get('name')?.errors" class="form-error mt-2" id="name.errors">
                     {{ nameMessage }}
                   </div>
               </div>

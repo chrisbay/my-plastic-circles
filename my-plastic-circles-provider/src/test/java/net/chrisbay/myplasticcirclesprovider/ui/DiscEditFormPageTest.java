@@ -1,5 +1,6 @@
 package net.chrisbay.myplasticcirclesprovider.ui;
 
+import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscFormPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscsPage;
 import org.openqa.selenium.By;
@@ -33,7 +34,7 @@ public class DiscEditFormPageTest extends AbstractUITest {
         List<WebElement> tableRows = discsPage.getRows();
         String editUrl = discsPage.getDiscEditURL(tableRows.size() - 1);
 
-        driver.get("http://localhost:8080" + editUrl);
+        driver.get(AbstractPage.BASE_URL + editUrl);
         this.page = new DiscFormPage(driver, editUrl);
         PageFactory.initElements(driver, this.page);
     }
@@ -50,7 +51,6 @@ public class DiscEditFormPageTest extends AbstractUITest {
         assertEquals(testNotes, values.get("notes"));
     }
 
-    // verify modified fields are saved
     @Test
     public void verifyModifiedFieldsAreSaved() {
         String newNotes = "something different";
@@ -69,14 +69,9 @@ public class DiscEditFormPageTest extends AbstractUITest {
 
     @Test
     public void verifyValidationErrorsAreDisplayed() {
-        try {
-            DiscsPage discsPage = this.page.fillAndSubmitForm("", "Discraft", "", "", "", "", "");
-            throw new IllegalStateException("Form submission should throw an exception");
-        } catch (Exception e) {
-            // do nothing
-        }
+        this.page.fillForm("a", "Discraft", "", "", "", "", "");
+        this.page.waitForDelayedModelError();
 
-        assertEquals(page.getPageUrl(), driver.getCurrentUrl());
         assertNotNull(page.getFieldErrorMessage("model"));
         assertNotNull(page.getFieldErrorMessage("speed"));
         assertNotNull(page.getFieldErrorMessage("glide"));

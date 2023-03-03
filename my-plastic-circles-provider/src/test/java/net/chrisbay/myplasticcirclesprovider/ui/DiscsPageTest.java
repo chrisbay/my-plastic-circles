@@ -1,5 +1,6 @@
 package net.chrisbay.myplasticcirclesprovider.ui;
 
+import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscsPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +15,7 @@ public class DiscsPageTest extends AbstractUITest {
 
     @BeforeMethod
     public void loadPage() {
-        driver.get("http://localhost:8080/discs");
+        driver.get(AbstractPage.BASE_URL + "/discs");
         this.page = PageFactory.initElements(driver, DiscsPage.class);
     }
 
@@ -27,7 +28,7 @@ public class DiscsPageTest extends AbstractUITest {
     @Test
     public void verifyAddDiscButton() {
         this.page.clickAddDiscBtn();
-        assertEquals("http://localhost:8080/discs/edit/0", driver.getCurrentUrl());
+        assertEquals(AbstractPage.BASE_URL + "/discs/0/edit", driver.getCurrentUrl());
     }
 
     @Test

@@ -17,29 +17,29 @@ public class DiscFormPage extends AbstractFormPage {
     private final String pageName;
     private String pagePath;
 
-    @FindBy(name = "model")
+    @FindBy(id = "model-input")
     private WebElement modelField;
 
-    @FindBy(name = "manufacturer")
+    @FindBy(id = "manufacturer-input")
     private WebElement manufacturerField;
 
-    @FindBy(name = "speed")
+    @FindBy(id = "speed-input")
     private WebElement speedField;
 
-    @FindBy(name = "glide")
+    @FindBy(id = "glide-input")
     private WebElement glideField;
 
-    @FindBy(name = "turn")
+    @FindBy(id = "turn-input")
     private WebElement turnField;
 
-    @FindBy(name = "fade")
+    @FindBy(id = "fade-input")
     private WebElement fadeField;
 
-    @FindBy(name = "notes")
+    @FindBy(id = "notes-input")
     private WebElement notesField;
 
-    @FindBy(css = "form button[type=submit]")
-    private WebElement submitBtn;
+    @FindBy(id = "disc-form")
+    private WebElement form;
 
     public DiscFormPage(WebDriver driver, String path) {
         super();
@@ -55,8 +55,7 @@ public class DiscFormPage extends AbstractFormPage {
         }
 
         this.pageUrl = BASE_URL + this.pagePath;
-        if (!driver.getTitle().equals("My Plastic Circles - " + getPageName())
-                || !driver.getCurrentUrl().equals(this.pageUrl)) {
+        if (!driver.getCurrentUrl().equals(this.pageUrl)) {
             throw new IllegalStateException("This is not the " + getPageName() + " Page. Current URL is: " + driver.getCurrentUrl());
         }
     }
@@ -74,6 +73,16 @@ public class DiscFormPage extends AbstractFormPage {
 
     public DiscsPage fillAndSubmitForm(String model, String manufacturer,
                                   String speed, String glide, String turn, String fade, String notes) {
+        this.fillForm(model, manufacturer, speed, glide, turn, fade, notes);
+        form.submit();
+
+        driver.findElement(By.id("discs-table"));
+
+        return PageFactory.initElements(this.driver, DiscsPage.class);
+    }
+
+    public void fillForm(String model, String manufacturer,
+                         String speed, String glide, String turn, String fade, String notes) {
         this.clearForm();
         this.modelField.sendKeys(model);
         this.getManufacturerSelectElement().selectByVisibleText(manufacturer);
@@ -82,9 +91,6 @@ public class DiscFormPage extends AbstractFormPage {
         this.turnField.sendKeys(turn);
         this.fadeField.sendKeys(fade);
         this.notesField.sendKeys(notes);
-        this.submitBtn.click();
-
-        return PageFactory.initElements(this.driver, DiscsPage.class);
     }
 
     private void clearForm() {
@@ -99,7 +105,9 @@ public class DiscFormPage extends AbstractFormPage {
     public DiscsPage fillNotesFieldAndSubmitForm(String notes) {
         this.notesField.clear();
         this.notesField.sendKeys(notes);
-        this.submitBtn.click();
+        this.form.submit();
+
+        driver.findElement(By.id("discs-table"));
 
         return PageFactory.initElements(this.driver, DiscsPage.class);
     }
@@ -140,19 +148,22 @@ public class DiscFormPage extends AbstractFormPage {
         return values;
     }
 
-    private Integer getIdFromEditUrl(String url) {
-        Pattern pattern = Pattern.compile(".*/(\\d+)");
+    private static Integer getIdFromEditUrl(String url) {
+        Pattern pattern = Pattern.compile(".*/(\\d+)/edit");
         Matcher matcher = pattern.matcher(url);
 
         if (!matcher.lookingAt()) return null;
 
-        int matchIdx = matcher.start(1);
-        return Integer.parseInt(url.substring(matchIdx));
+        return Integer.parseInt(matcher.group(1));
+    }
+
+    public void waitForDelayedModelError() {
+        this.driver.findElement(By.id("model.errors"));
     }
 
     public static DiscFormPage loadCreateDiscPage(WebDriver driver) {
-        driver.get("http://localhost:8080/discs/edit/0");
-        DiscFormPage createDiscPage = new DiscFormPage(driver, "/discs/edit/0");
+        driver.get("http://localhost:4200/discs/0/edit");
+        DiscFormPage createDiscPage = new DiscFormPage(driver, "/discs/0/edit");
         PageFactory.initElements(driver, createDiscPage);
         return createDiscPage;
     }

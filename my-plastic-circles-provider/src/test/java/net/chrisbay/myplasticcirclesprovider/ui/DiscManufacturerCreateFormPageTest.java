@@ -1,7 +1,9 @@
 package net.chrisbay.myplasticcirclesprovider.ui;
 
+import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscManufacturerFormPage;
 import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscManufacturersPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +20,7 @@ public class DiscManufacturerCreateFormPageTest extends AbstractUITest {
 
     @BeforeMethod
     public void loadPage() {
-        driver.get("http://localhost:8080/manufacturers/new");
+        driver.get(AbstractPage.BASE_URL + "/manufacturers/new");
         this.page = PageFactory.initElements(driver, DiscManufacturerFormPage.class);
     }
 
@@ -33,17 +35,10 @@ public class DiscManufacturerCreateFormPageTest extends AbstractUITest {
         assertEquals(testName, manufacturersPage.getManufacturerName(rowIdx));
     }
 
-    // verify submission errors
     @Test
     public void verifyValidationErrorsAreDisplayed() {
-        try {
-            this.page.fillAndSubmitForm("");
-            throw new IllegalStateException("Form submission should throw an exception");
-        } catch (Exception e) {
-            // do nothing
-        }
-
-        assertEquals("http://localhost:8080/manufacturers/new", driver.getCurrentUrl());
+        this.page.fillNameField("a");
+        this.page.waitForDelayedNameError();
         assertNotNull(page.getFieldErrorMessage("name"));
     }
 
