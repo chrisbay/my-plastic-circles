@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { DiscResolver } from "../service/disc-resolver.service";
 import { ManufacturersResolver } from "../service/manufacturers-resolver.service";
+import { DiscEditGuard } from "./disc-edit.guard";
 import { DiscsFormComponent } from './discs-form.component';
 import { DiscsListComponent } from "./discs-list.component";
 
@@ -37,6 +38,7 @@ import { DiscsListComponent } from "./discs-list.component";
           {
             path: ':id/edit',
             component: DiscsFormComponent,
+            canActivate: [DiscEditGuard],
             resolve: { 
               disc: DiscResolver,
               manufacturers: ManufacturersResolver 
