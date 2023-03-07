@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from '../model/message';
-import { MessagesService } from '../service/messages.service';
+import { MessageService } from '../service/message.service';
 
 @Component({
   selector: 'mpc-message-center',
@@ -11,7 +11,7 @@ export class MessageCenterComponent implements OnInit {
 
   messages: Message[];
 
-  constructor(private messagesService: MessagesService) {}
+  constructor(private messagesService: MessageService) {}
 
   ngOnInit() {
     this.messagesService.getMessages().subscribe({

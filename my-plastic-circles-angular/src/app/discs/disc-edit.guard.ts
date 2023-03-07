@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MessageType } from '../model/message';
-import { MessagesService } from '../service/messages.service';
+import { MessageService } from '../service/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { MessagesService } from '../service/messages.service';
 export class DiscEditGuard implements CanActivate {
 
   constructor(private router: Router,
-              private messagesService: MessagesService) {}
+              private messageService: MessageService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -18,7 +18,7 @@ export class DiscEditGuard implements CanActivate {
       const idParam = next.paramMap.get('id');
       const id = Number(idParam);
     if (isNaN(id) || id < 1) {
-      this.messagesService.addMessage({
+      this.messageService.addMessage({
         type: MessageType.Error, 
         message: `Invalid disc id: ${idParam}`
       });

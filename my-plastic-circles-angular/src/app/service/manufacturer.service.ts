@@ -8,7 +8,7 @@ import { BaseService } from "./base.service";
 @Injectable({
   providedIn: 'root'
 })
-export class ManufacturersService extends BaseService {
+export class ManufacturerService extends BaseService {
 
   private manufacturersUrl: string = 'http://localhost:8081/api/manufacturer';
 

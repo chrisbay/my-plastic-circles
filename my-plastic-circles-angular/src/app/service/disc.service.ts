@@ -8,7 +8,7 @@ import { BaseService } from "./base.service";
 @Injectable({
   providedIn: 'root'
 })
-export class DiscsService extends BaseService {
+export class DiscService extends BaseService {
 
   private discsUrl: string = 'http://localhost:8081/api/disc';
 

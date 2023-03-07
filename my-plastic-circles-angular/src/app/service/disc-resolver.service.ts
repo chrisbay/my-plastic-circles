@@ -3,14 +3,14 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { Observable, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { DiscResolved } from "../model/disc";
-import { DiscsService } from "./discs.service";
+import { DiscService } from "./disc.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscResolver implements Resolve<DiscResolved> {
 
-  constructor (private discsService: DiscsService) {}
+  constructor (private discService: DiscService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DiscResolved> {
     const id = route.paramMap.get('id');
@@ -19,7 +19,7 @@ export class DiscResolver implements Resolve<DiscResolved> {
       console.error(message);
       return of({disc: null, error: message});
     }
-    return this.discsService.getDisc(Number(id))
+    return this.discService.getDisc(Number(id))
     .pipe( 
       map(disc => ({disc: disc})),
       catchError(error => {

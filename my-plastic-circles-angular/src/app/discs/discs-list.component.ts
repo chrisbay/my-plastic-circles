@@ -17,7 +17,7 @@ export class DiscsListComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.discsService.getDiscs().subscribe({
       next: discs => this.discs = discs,
-      error: err => this.messagesService.addMessage({type: MessageType.Error, message: err})
+      error: err => this.messageService.addMessage({type: MessageType.Error, message: err})
     });
   }
 
@@ -32,8 +32,8 @@ export class DiscsListComponent extends BaseComponent implements OnInit {
       errorMsg = `An error occurred while attempting to remove ${disc.model} from your favorites`;
     }
     this.discsService.toggleFavoriteStatus(disc).subscribe({
-      next: () => this.messagesService.addMessage({type: MessageType.Info, message: successMsg}),
-      error: () => this.messagesService.addMessage({type: MessageType.Error, message: errorMsg})
+      next: () => this.messageService.addMessage({type: MessageType.Info, message: successMsg}),
+      error: () => this.messageService.addMessage({type: MessageType.Error, message: errorMsg})
     });
   }
 

@@ -3,17 +3,17 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { Observable, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { ManufacturersResolved } from "../model/manufacturer";
-import { ManufacturersService } from "./manufacturers.service";
+import { ManufacturerService } from "./manufacturer.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManufacturersResolver implements Resolve<ManufacturersResolved> {
 
-  constructor (private manufacturersService: ManufacturersService) {}
+  constructor (private manufacturerService: ManufacturerService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ManufacturersResolved> {
-    return this.manufacturersService.getManufacturers()
+    return this.manufacturerService.getManufacturers()
     .pipe( 
       map(manufacturers => ({manufacturers: manufacturers})),
       catchError(error => {

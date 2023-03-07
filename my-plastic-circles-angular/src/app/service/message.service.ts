@@ -5,7 +5,7 @@ import { Message } from "../model/message";
 @Injectable({
   providedIn: 'root'
 })
-export class MessagesService {
+export class MessageService {
 
   private messages: Message[] = [];
   private subscriber: Subscriber<Message[]>;

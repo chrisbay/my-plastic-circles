@@ -1,12 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { BaseComponent } from '../base.component';
 import { Manufacturer } from '../model/manufacturer';
-import { MessageType } from '../model/message';
-import { ManufacturersService } from '../service/manufacturers.service';
-import { MessagesService } from '../service/messages.service';
 
 @Component({
   templateUrl: './manufacturers-form.component.html'
@@ -41,7 +37,7 @@ export class ManufacturersFormComponent extends BaseComponent implements OnInit 
   }
 
   onSubmit(): void {
-    this.manufacturersService.save(this.manufacturerForm.value)
+    this.manufacturerService.save(this.manufacturerForm.value)
       .subscribe({
         next: () => this.router.navigate(['/manufacturers']),
         error: err => this.handleError(err)
