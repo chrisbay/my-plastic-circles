@@ -11,7 +11,7 @@ export abstract class BaseService {
       errorMessage = `Backend returned code ${err.status}: ${err.message}`;
     }
     console.error(err);
-    return throwError(() => errorMessage);
+    return throwError(errorMessage);
   }
 
 }

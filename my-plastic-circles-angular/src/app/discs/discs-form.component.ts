@@ -46,6 +46,7 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
         const manufacturersResolved: ManufacturersResolved = this.route.snapshot.data['manufacturers'];
         if (discResolved.error || manufacturersResolved.error) {
           this.handleError('An error occured while retrieving the selected disc');
+          this.router.navigate(['/discs']);
           return;
         }
 
