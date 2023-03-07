@@ -1,4 +1,4 @@
-import { Manufacturer } from "../manufacturers/manufacturer";
+import { Manufacturer } from "./manufacturer";
 
 export interface Disc {
   id: number | null;

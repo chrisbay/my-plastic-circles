@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 
 import { Toast } from 'bootstrap';
 import { fromEvent } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { MessageType } from '../model/message';
 
 @Component({
   selector: 'mpc-message',
@@ -18,10 +18,10 @@ export class MessageComponent implements OnInit {
   messageElement: ElementRef;
 
   @Input()
-  type: string;
+  type: MessageType;
 
   @Input()
-  text: string;
+  message: string;
 
   toast: Toast;
 
@@ -41,17 +41,10 @@ export class MessageComponent implements OnInit {
   show(): void {
     this.toast = new Toast(
       this.messageElement.nativeElement,
-      this.type === 'error'
-        ? {
-            autohide: false,
-          }
-        : {
-            delay: 5000,
-          }
+      this.type === MessageType.Error ? {autohide: false} : {delay: 3000}
     );
 
     fromEvent(this.messageElement.nativeElement, 'hidden.bs.toast')
-      .pipe(take(1))
       .subscribe(() => this.clear());
 
     this.toast.show();

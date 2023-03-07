@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { DiscsListComponent } from "./discs-list.component";
-import { DiscsFormComponent } from './discs-form.component';
-import { DiscResolver } from "./disc-resolver.service";
-import { ManufacturersResolver } from "../manufacturers/manufacturers-resolver.service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { DiscResolver } from "../service/disc-resolver.service";
+import { ManufacturersResolver } from "../service/manufacturers-resolver.service";
+import { DiscsFormComponent } from './discs-form.component';
+import { DiscsListComponent } from "./discs-list.component";
 
 @NgModule({
   imports: [

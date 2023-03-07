@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
-import { Manufacturer } from './manufacturer';
-import { ManufacturersService } from './manufacturers.service';
+import { BaseComponent } from '../base.component';
+import { Manufacturer } from '../model/manufacturer';
+import { MessageType } from '../model/message';
+import { ManufacturersService } from '../service/manufacturers.service';
+import { MessagesService } from '../service/messages.service';
 
 @Component({
   templateUrl: './manufacturers-form.component.html'
 })
-export class ManufacturersFormComponent implements OnInit {
+export class ManufacturersFormComponent extends BaseComponent implements OnInit {
 
   manufacturerForm!: FormGroup;
   manufacturer: Manufacturer;
@@ -20,9 +23,9 @@ export class ManufacturersFormComponent implements OnInit {
     maxlength: 'Name must be between 2 and 50 characters'
   };
 
-  constructor(private fb: FormBuilder, 
-              private manufacturersService: ManufacturersService,
-              private router: Router) {}
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit() {
     this.manufacturerForm = this.fb.group({
@@ -41,7 +44,7 @@ export class ManufacturersFormComponent implements OnInit {
     this.manufacturersService.save(this.manufacturerForm.value)
       .subscribe({
         next: () => this.router.navigate(['/manufacturers']),
-        error: err => console.log(err)
+        error: err => this.handleError(err)
       });
   }
 
@@ -51,7 +54,6 @@ export class ManufacturersFormComponent implements OnInit {
       this.nameMessage = Object.keys(c.errors).map(
         key => this.validationMessages[key]).join(' ');
     }
-    console.log(this.nameMessage);
   }
 
 }

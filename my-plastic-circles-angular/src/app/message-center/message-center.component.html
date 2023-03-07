@@ -2,7 +2,7 @@
   <div *ngFor="let message of messages; index as i">
     <mpc-message
       [type]="message.type"
-      [text]="message.text"
+      [message]="message.message"
       (clearEvent)="clearMessage(i)"></mpc-message>
   </div>
 </div>

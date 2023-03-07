@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Manufacturer } from './manufacturer';
-import { ManufacturersService } from './manufacturers.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BaseComponent } from '../base.component';
+import { Manufacturer } from '../model/manufacturer';
+import { MessageType } from '../model/message';
 
 @Component({
   templateUrl: './manufacturers-list.component.html'
 })
-export class ManufacturersListComponent implements OnInit {
+export class ManufacturersListComponent extends BaseComponent implements OnInit {
 
   private manufacturers: Manufacturer[];
-  errorMessage: string = '';
 
-  constructor(private manufacturersService: ManufacturersService) {}
+  constructor(injector: Injector) { 
+    super(injector);
+  }
 
   ngOnInit() {
     this.manufacturersService.getManufacturers().subscribe({
       next: data => this.manufacturers = data,
-      error: err => this.errorMessage = err
+      error: err => this.handleError(err)
     });
   }
 

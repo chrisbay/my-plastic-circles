@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from './Message';
-import { MessagesService } from './messages.service';
+import { Message } from '../model/message';
+import { MessagesService } from '../service/messages.service';
 
 @Component({
   selector: 'mpc-message-center',
@@ -17,10 +17,6 @@ export class MessageCenterComponent implements OnInit {
     this.messagesService.getMessages().subscribe({
       next: messages => this.messages = messages
     });
-  }
-
-  getIconClass(type: string) {
-    return 'fa-circle-info';
   }
 
   clearMessage(idx: number): void {

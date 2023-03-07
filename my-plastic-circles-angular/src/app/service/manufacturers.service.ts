@@ -1,17 +1,20 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
-import { Manufacturer } from "./manufacturer";
+import { catchError } from "rxjs/operators";
+import { Manufacturer } from "../model/manufacturer";
+import { BaseService } from "./base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManufacturersService {
+export class ManufacturersService extends BaseService {
 
   private manufacturersUrl: string = 'http://localhost:8081/api/manufacturer';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getManufacturers(): Observable<Manufacturer[]> {
     return this.http.get<Manufacturer[]>(this.manufacturersUrl)
@@ -22,25 +25,12 @@ export class ManufacturersService {
 
   save(manufacturer: Manufacturer): Observable<Manufacturer> {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
+      headers: new HttpHeaders({'Content-Type':  'application/json'})
     };
     return this.http.post<Manufacturer>(this.manufacturersUrl, manufacturer, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
-  }
-
-  private handleError(err: HttpErrorResponse): Observable<never> {
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${err.error.message}`;
-    } else {
-      errorMessage = `Backend returned code ${err.status}: ${err.message}`;
-    }
-    console.error(err);
-    return throwError(() => errorMessage);
   }
 
 }

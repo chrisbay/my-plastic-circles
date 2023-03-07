@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injector, OnInit } from '@angular/core';
+import { AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { Manufacturer, ManufacturersResolved } from '../manufacturers/manufacturer';
-import { ManufacturersService } from '../manufacturers/manufacturers.service';
-import { Disc, DiscResolved } from './disc';
-import { DiscsService } from './discs.service';
+import { BaseComponent } from '../base.component';
+import { Disc, DiscResolved } from '../model/disc';
+import { Manufacturer, ManufacturersResolved } from '../model/manufacturer';
 
 @Component({
   templateUrl: './discs-form.component.html'
 })
-export class DiscsFormComponent implements OnInit {
+export class DiscsFormComponent extends BaseComponent implements OnInit {
 
   discForm: FormGroup;
   pageTitle: string = 'New Disc';
@@ -25,11 +23,9 @@ export class DiscsFormComponent implements OnInit {
     maxlength: 'Model must be between 2 and 50 characters'
   };
 
-  constructor(private fb: FormBuilder,
-              private discsService: DiscsService,
-              private manufacturersService: ManufacturersService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(injector: Injector) { 
+    super(injector);
+  }
 
   ngOnInit() {
 
@@ -44,12 +40,13 @@ export class DiscsFormComponent implements OnInit {
     });
 
     this.route.paramMap.subscribe(
-      params => {
+      () => {
         this.isNew = this.route.snapshot.data['isNew'];
         const discResolved: DiscResolved = this.route.snapshot.data['disc'];
         const manufacturersResolved: ManufacturersResolved = this.route.snapshot.data['manufacturers'];
         if (discResolved.error || manufacturersResolved.error) {
-          // TODO -  handle error
+          this.handleError('An error occured while retrieving the selected disc');
+          return;
         }
 
         this.manufacturers = manufacturersResolved.manufacturers;
@@ -84,7 +81,7 @@ export class DiscsFormComponent implements OnInit {
       this.discsService.save(this.discForm.value)
         .subscribe({
           next: () => this.router.navigate(['/discs']),
-          error: err => console.log(err)
+          error: err => this.handleError(err)
         });
     } else {
       const disc = this.discForm.value;
@@ -92,7 +89,7 @@ export class DiscsFormComponent implements OnInit {
       this.discsService.update(disc)
         .subscribe({
           next: () => this.router.navigate(['/discs']),
-          error: err => console.log(err)
+          error: err => this.handleError(err)
         });
     }
   }
@@ -101,7 +98,7 @@ export class DiscsFormComponent implements OnInit {
     this.discsService.delete(this.disc.id)
       .subscribe({
         next: () => this.router.navigate(['/discs']),
-        error: err => console.log(err)
+        error: err => this.handleError(err)
       });
   }
 

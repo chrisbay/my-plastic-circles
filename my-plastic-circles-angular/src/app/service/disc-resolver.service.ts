@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-import { DiscResolved } from "./disc";
+import { DiscResolved } from "../model/disc";
 import { DiscsService } from "./discs.service";
 
 @Injectable({
