@@ -20,10 +20,7 @@ describe('ManufacturersListComponent', () => {
         HttpClientModule
       ],
       providers: [ 
-        { 
-          provide: ManufacturerService, 
-          useValue: TestMocks.getManufacturerServiceMock()
-        }
+        ManufacturerService
       ],
     })
     .compileComponents();
