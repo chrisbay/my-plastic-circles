@@ -13,7 +13,7 @@ export class ManufacturersResolver implements Resolve<ManufacturersResolved> {
   constructor (private manufacturerService: ManufacturerService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ManufacturersResolved> {
-    return this.manufacturerService.getManufacturers()
+    return this.manufacturerService.getAll()
     .pipe( 
       map(manufacturers => ({manufacturers: manufacturers})),
       catchError(error => {
