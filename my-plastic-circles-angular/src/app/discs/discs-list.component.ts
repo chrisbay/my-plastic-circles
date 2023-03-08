@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BaseComponent } from '../base.component';
 import { Disc } from '../model/disc';
 import { MessageType } from '../model/message';
@@ -21,7 +22,7 @@ export class DiscsListComponent extends BaseComponent implements OnInit {
     });
   }
 
-  toggleFavoriteStatus(disc: Disc): void {
+  toggleFavoriteStatus(disc: Disc): Observable<Disc> {
     disc.favorite = !disc.favorite;
     let successMsg, errorMsg;
     if (disc.favorite) {
@@ -31,10 +32,13 @@ export class DiscsListComponent extends BaseComponent implements OnInit {
       successMsg = `${disc.model} was removed from your favorites`;
       errorMsg = `An error occurred while attempting to remove ${disc.model} from your favorites`;
     }
-    this.discService.update(disc).subscribe({
+    
+    const obs = this.discService.update(disc);
+    obs.subscribe({
       next: () => this.messageService.addMessage({type: MessageType.Info, message: successMsg}),
       error: () => this.messageService.addMessage({type: MessageType.Error, message: errorMsg})
     });
+    return obs;
   }
 
 }

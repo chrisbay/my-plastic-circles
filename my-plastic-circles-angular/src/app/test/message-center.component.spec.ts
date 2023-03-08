@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MessageCenterComponent } from './message-center.component';
-import { MessageComponent } from './message.component';
+import { Observable } from 'rxjs';
+import { MessageCenterComponent } from '../message-center/message-center.component';
+import { MessageComponent } from '../message-center/message.component';
+import { Message } from '../model/message';
+import { MessageService } from '../service/message.service';
 
 
 describe('MessageCenterComponent', () => {
@@ -9,7 +12,8 @@ describe('MessageCenterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageCenterComponent, MessageComponent ]
+      declarations: [ MessageCenterComponent, MessageComponent ],
+      providers: [ MessageService ]
     })
     .compileComponents();
   }));

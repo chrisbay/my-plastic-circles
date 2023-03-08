@@ -109,7 +109,6 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
       this.modelMessage = Object.keys(c.errors).map(
         key => this.validationMessages[key]).join(' ');
     }
-    console.log(this.modelMessage);
   }
 
 }

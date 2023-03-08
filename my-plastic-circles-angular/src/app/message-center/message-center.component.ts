@@ -14,7 +14,7 @@ export class MessageCenterComponent implements OnInit {
   constructor(private messagesService: MessageService) {}
 
   ngOnInit() {
-    this.messagesService.getMessages().subscribe({
+    this.messagesService.publisher.subscribe({
       next: messages => this.messages = messages
     });
   }

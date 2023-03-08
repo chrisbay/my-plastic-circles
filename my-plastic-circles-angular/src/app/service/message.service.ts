@@ -8,22 +8,33 @@ import { Message } from "../model/message";
 export class MessageService {
 
   private messages: Message[] = [];
-  private subscriber: Subscriber<Message[]>;
+  private _publisher: Observable<Message[]>;
+  private subscribers: Subscriber<Message[]>[] = [];
 
-  getMessages(): Observable<Message[]> {
-    return new Observable((subscriber) => {
-      this.subscriber = subscriber;
+  constructor() {
+    this._publisher = new Observable((subscriber) => {
+      this.subscribers.push(subscriber);
     });
+  }
+
+  get publisher(): Observable<Message[]> {
+    return this._publisher;
   }
 
   addMessage(message: Message): void {
     this.messages.unshift(message);
-    this.subscriber.next(this.messages);
+    this.notifyAll();
   }
 
   clearMessage(idx: number): void {
     this.messages.splice(idx, 1);
-    this.subscriber.next(this.messages)
+    this.notifyAll();
+  }
+
+  private notifyAll(): void {
+    for (let s of this.subscribers) {
+      s.next(this.messages);
+    }
   }
 
 }
