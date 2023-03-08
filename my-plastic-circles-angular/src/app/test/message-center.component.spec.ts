@@ -9,11 +9,17 @@ import { MessageService } from '../service/message.service';
 describe('MessageCenterComponent', () => {
   let component: MessageCenterComponent;
   let fixture: ComponentFixture<MessageCenterComponent>;
+  let messageServiceSpy: jasmine.SpyObj<MessageService> = jasmine.createSpyObj('MessageService', ['clearMessage', 'subscribe'])
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MessageCenterComponent, MessageComponent ],
-      providers: [ MessageService ]
+      providers: [ 
+        {
+          provide: MessageService,
+          useValue: messageServiceSpy
+        } 
+      ]
     })
     .compileComponents();
   }));
@@ -26,5 +32,12 @@ describe('MessageCenterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call MessageService.clearMessage', () => {
+    component.clearMessage(0);
+    expect(messageServiceSpy.clearMessage.calls.count())
+      .withContext('one call to .clearMessage')
+      .toBe(1);
   });
 });

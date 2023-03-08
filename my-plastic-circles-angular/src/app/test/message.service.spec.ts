@@ -10,7 +10,7 @@ describe('MessageService', () => {
       message: 'test'
     };
 
-    service.publisher.subscribe({
+    service.subscribe({
       next: messages => {
         expect(messages.length).toBe(1);
         expect(messages[0]).toBe(message);
@@ -31,7 +31,7 @@ describe('MessageService', () => {
 
     service.addMessage(message);
 
-    service.publisher.subscribe({
+    service.subscribe({
       next: messages => {
         expect(messages.length).toBe(0);
         done();

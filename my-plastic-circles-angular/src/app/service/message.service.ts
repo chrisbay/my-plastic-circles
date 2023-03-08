@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subscriber } from "rxjs";
+import { Observable, PartialObserver, Subscriber } from "rxjs";
 import { Message } from "../model/message";
 
 @Injectable({
@@ -17,8 +17,8 @@ export class MessageService {
     });
   }
 
-  get publisher(): Observable<Message[]> {
-    return this._publisher;
+  subscribe(observer: PartialObserver<Message[]>): void {
+    this._publisher.subscribe(observer);
   }
 
   addMessage(message: Message): void {
