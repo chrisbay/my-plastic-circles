@@ -9,9 +9,9 @@ import { AppComponent } from './app.component';
 import { DiscsModule } from './discs/discs.module';
 import { HomeComponent } from './home/home.component';
 import { ManufacturersModule } from './manufacturers/manufacturers.module';
-import { PageNotFoundComponent } from './page-not-found.component';
 import { MessageCenterComponent } from './message-center/message-center.component';
 import { MessageComponent } from './message-center/message.component';
+import { PageNotFoundComponent } from './page-not-found.component';
 
 @NgModule({
   declarations: [

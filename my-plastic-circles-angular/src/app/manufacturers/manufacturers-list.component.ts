@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { Manufacturer } from '../model/manufacturer';
-import { MessageType } from '../model/message';
 
 @Component({
   templateUrl: './manufacturers-list.component.html'
@@ -15,7 +14,7 @@ export class ManufacturersListComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    this.manufacturerService.getManufacturers().subscribe({
+    this.manufacturerService.getAll().subscribe({
       next: data => this.manufacturers = data,
       error: err => this.handleError(err)
     });

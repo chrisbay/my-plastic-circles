@@ -79,7 +79,7 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
   onSubmit(isNew: boolean): void {
 
     if (isNew) {
-      this.discsService.save(this.discForm.value)
+      this.discService.save(this.discForm.value)
         .subscribe({
           next: () => this.router.navigate(['/discs']),
           error: err => this.handleError(err)
@@ -87,7 +87,7 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
     } else {
       const disc = this.discForm.value;
       disc.id = this.disc.id;
-      this.discsService.update(disc)
+      this.discService.update(disc)
         .subscribe({
           next: () => this.router.navigate(['/discs']),
           error: err => this.handleError(err)
@@ -96,7 +96,7 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.discsService.delete(this.disc.id)
+    this.discService.delete(this.disc.id)
       .subscribe({
         next: () => this.router.navigate(['/discs']),
         error: err => this.handleError(err)

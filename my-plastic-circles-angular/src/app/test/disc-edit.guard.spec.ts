@@ -1,11 +1,13 @@
 import { TestBed, async, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { DiscEditGuard } from './disc-edit.guard';
+import { DiscEditGuard } from '../discs/disc-edit.guard';
 
 describe('DiscEditGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DiscEditGuard]
+      providers: [DiscEditGuard],
+      imports: [ RouterTestingModule ]
     });
   });
 

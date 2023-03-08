@@ -16,14 +16,14 @@ export class DiscService extends BaseService {
     super();
   }
 
-  getDiscs(): Observable<Disc[]> {
+  getAll(): Observable<Disc[]> {
     return this.http.get<Disc[]>(this.discsUrl)
       .pipe(
         catchError(this.handleError)
     );
   }
 
-  getDisc(id: number): Observable<Disc> {
+  get(id: number): Observable<Disc> {
     if (id === 0) return of(this.initializeDisc());
 
     return this.http.get<Disc>(`${this.discsUrl}/${id}`)
@@ -53,6 +53,7 @@ export class DiscService extends BaseService {
     const requestUrl = `${this.discsUrl}/${disc.id}`;
     return this.http.put<Disc>(requestUrl, disc, httpOptions)
       .pipe(
+        map(() => disc),
         catchError(this.handleError)
       );
   }
@@ -61,16 +62,6 @@ export class DiscService extends BaseService {
     const requestUrl = `${this.discsUrl}/${id}`;
     return this.http.delete(requestUrl)
       .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  toggleFavoriteStatus(disc: Disc): Observable<Disc> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.discsUrl}/${disc.id}`;
-    return this.http.put<Disc>(url, disc, { headers })
-      .pipe(
-        map(() => disc),
         catchError(this.handleError)
       );
   }

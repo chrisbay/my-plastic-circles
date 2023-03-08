@@ -19,7 +19,7 @@ export class DiscResolver implements Resolve<DiscResolved> {
       console.error(message);
       return of({disc: null, error: message});
     }
-    return this.discService.getDisc(Number(id))
+    return this.discService.get(Number(id))
     .pipe( 
       map(disc => ({disc: disc})),
       catchError(error => {

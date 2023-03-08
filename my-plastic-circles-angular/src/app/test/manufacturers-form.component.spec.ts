@@ -1,6 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { ManufacturersFormComponent } from './manufacturers-form.component';
+import { ManufacturersFormComponent } from '../manufacturers/manufacturers-form.component';
 
 describe('ManufacturersFormComponent', () => {
   let component: ManufacturersFormComponent;
@@ -8,7 +11,12 @@ describe('ManufacturersFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManufacturersFormComponent ]
+      declarations: [ ManufacturersFormComponent ],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        HttpClientModule
+      ]
     })
     .compileComponents();
   }));

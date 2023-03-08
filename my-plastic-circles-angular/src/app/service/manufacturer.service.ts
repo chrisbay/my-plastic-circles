@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Manufacturer } from "../model/manufacturer";
 import { BaseService } from "./base.service";
@@ -16,7 +16,7 @@ export class ManufacturerService extends BaseService {
     super();
   }
 
-  getManufacturers(): Observable<Manufacturer[]> {
+  getAll(): Observable<Manufacturer[]> {
     return this.http.get<Manufacturer[]>(this.manufacturersUrl)
     .pipe(
         catchError(this.handleError)
