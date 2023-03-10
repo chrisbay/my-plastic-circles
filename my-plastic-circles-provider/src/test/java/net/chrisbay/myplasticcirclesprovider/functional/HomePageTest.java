@@ -1,7 +1,7 @@
-package net.chrisbay.myplasticcirclesprovider.ui;
+package net.chrisbay.myplasticcirclesprovider.functional;
 
-import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
-import net.chrisbay.myplasticcirclesprovider.ui.pages.HomePage;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.AbstractPage;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.HomePage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

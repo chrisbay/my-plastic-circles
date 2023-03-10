@@ -1,14 +1,16 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { BaseComponent } from '../base.component';
+import { AbstractBaseComponent } from '../abstract-base.component';
 import { Disc, DiscResolved } from '../model/disc';
 import { Manufacturer, ManufacturersResolved } from '../model/manufacturer';
+import { MessageType } from '../model/message';
+import { MessageService } from '../service/message.service';
 
 @Component({
   templateUrl: './discs-form.component.html'
 })
-export class DiscsFormComponent extends BaseComponent implements OnInit {
+export class DiscsFormComponent extends AbstractBaseComponent implements OnInit {
 
   discForm: FormGroup;
   pageTitle: string = 'New Disc';
@@ -23,7 +25,7 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
     maxlength: 'Model must be between 2 and 50 characters'
   };
 
-  constructor(injector: Injector) { 
+  constructor(injector: Injector, messageService: MessageService) { 
     super(injector);
   }
 
@@ -81,7 +83,13 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
     if (isNew) {
       this.discService.save(this.discForm.value)
         .subscribe({
-          next: () => this.router.navigate(['/discs']),
+          next: disc => {
+            this.messageService.addMessage({
+              type: MessageType.Success, 
+              message: `<b>${disc.model}</b> was added to your collection`
+            });
+            this.router.navigate(['/discs']);
+          },
           error: err => this.handleError(err)
         });
     } else {
@@ -89,16 +97,29 @@ export class DiscsFormComponent extends BaseComponent implements OnInit {
       disc.id = this.disc.id;
       this.discService.update(disc)
         .subscribe({
-          next: () => this.router.navigate(['/discs']),
+          next: () => {
+            this.messageService.addMessage({
+              type: MessageType.Success, 
+              message: `<b>${disc.model}</b> was saved`
+            });
+            this.router.navigate(['/discs']);
+        },
           error: err => this.handleError(err)
         });
     }
   }
 
   onDelete(): void {
+    const discName = this.disc.model;
     this.discService.delete(this.disc.id)
       .subscribe({
-        next: () => this.router.navigate(['/discs']),
+        next: () => {
+          this.messageService.addMessage({
+            type: MessageType.Success, 
+            message: `<b>${discName}</b> was deleted`
+          });
+          this.router.navigate(['/discs']);
+        },
         error: err => this.handleError(err)
       });
   }

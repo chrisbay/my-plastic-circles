@@ -1,13 +1,15 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { BaseComponent } from '../base.component';
+import { AbstractBaseComponent } from '../abstract-base.component';
 import { Manufacturer } from '../model/manufacturer';
+import { MessageType } from '../model/message';
+import { MessageService } from '../service/message.service';
 
 @Component({
   templateUrl: './manufacturers-form.component.html'
 })
-export class ManufacturersFormComponent extends BaseComponent implements OnInit {
+export class ManufacturersFormComponent extends AbstractBaseComponent implements OnInit {
 
   manufacturerForm!: FormGroup;
   manufacturer: Manufacturer;
@@ -19,7 +21,7 @@ export class ManufacturersFormComponent extends BaseComponent implements OnInit 
     maxlength: 'Name must be between 2 and 50 characters'
   };
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, messageService: MessageService) {
     super(injector);
   }
 
@@ -39,7 +41,13 @@ export class ManufacturersFormComponent extends BaseComponent implements OnInit 
   onSubmit(): void {
     this.manufacturerService.save(this.manufacturerForm.value)
       .subscribe({
-        next: () => this.router.navigate(['/manufacturers']),
+        next: manufacturer => {
+          this.messageService.addMessage({
+            type: MessageType.Success, 
+            message: `<b>${manufacturer.name}</b> was added to the system`
+          });
+          this.router.navigate(['/manufacturers'])
+        },
         error: err => this.handleError(err)
       });
   }

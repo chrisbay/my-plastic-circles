@@ -1,11 +1,11 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BaseComponent } from '../base.component';
+import { AbstractBaseComponent } from '../abstract-base.component';
 import { Manufacturer } from '../model/manufacturer';
 
 @Component({
   templateUrl: './manufacturers-list.component.html'
 })
-export class ManufacturersListComponent extends BaseComponent implements OnInit {
+export class ManufacturersListComponent extends AbstractBaseComponent implements OnInit {
 
   private manufacturers: Manufacturer[];
 

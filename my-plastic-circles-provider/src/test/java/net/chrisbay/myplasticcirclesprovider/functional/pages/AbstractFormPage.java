@@ -1,4 +1,4 @@
-package net.chrisbay.myplasticcirclesprovider.ui.pages;
+package net.chrisbay.myplasticcirclesprovider.functional.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

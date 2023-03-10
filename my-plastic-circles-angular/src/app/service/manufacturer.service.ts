@@ -3,12 +3,12 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Manufacturer } from "../model/manufacturer";
-import { BaseService } from "./base.service";
+import { AbstractBaseService } from "./abstract-base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManufacturerService extends BaseService {
+export class ManufacturerService extends AbstractBaseService {
 
   private manufacturersUrl: string = 'http://localhost:8081/api/manufacturer';
 

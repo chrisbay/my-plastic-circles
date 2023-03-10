@@ -1,18 +1,18 @@
-package net.chrisbay.myplasticcirclesprovider.ui;
+package net.chrisbay.myplasticcirclesprovider.functional;
 
-import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
-import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscManufacturerFormPage;
-import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscManufacturersPage;
-import org.openqa.selenium.By;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.AbstractPage;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.DiscManufacturerFormPage;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.DiscManufacturersPage;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.DiscsPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DiscManufacturerCreateFormPageTest extends AbstractUITest {
 
@@ -40,6 +40,20 @@ public class DiscManufacturerCreateFormPageTest extends AbstractUITest {
         this.page.fillNameField("a");
         this.page.waitForDelayedNameError();
         assertNotNull(page.getFieldErrorMessage("name"));
+    }
+
+    @Test
+    public void verifySuccessMessageOnNewManufacturer() {
+
+        String testName = "New Manufacturer";
+        String expectedMessage = testName + " was added to the system";
+        DiscManufacturersPage manufacturersPage = this.page.fillAndSubmitForm(testName);
+
+        List<Map<String, String>> messages = manufacturersPage.getMessages();
+        assertTrue(messages.size() > 0);
+        Map<String, String> firstMessage = messages.get(0);
+        assertEquals("Success", firstMessage.get("type"));
+        assertEquals(expectedMessage, firstMessage.get("message"));
     }
 
 }

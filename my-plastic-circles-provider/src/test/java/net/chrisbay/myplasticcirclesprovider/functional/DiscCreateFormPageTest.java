@@ -1,15 +1,13 @@
-package net.chrisbay.myplasticcirclesprovider.ui;
+package net.chrisbay.myplasticcirclesprovider.functional;
 
-import net.chrisbay.myplasticcirclesprovider.ui.pages.AbstractPage;
-import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscFormPage;
-import net.chrisbay.myplasticcirclesprovider.ui.pages.DiscsPage;
-import org.openqa.selenium.By;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.DiscFormPage;
+import net.chrisbay.myplasticcirclesprovider.functional.pages.DiscsPage;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -76,6 +74,18 @@ public class DiscCreateFormPageTest extends AbstractUITest {
         assertNotNull(page.getFieldErrorMessage("glide"));
         assertNotNull(page.getFieldErrorMessage("turn"));
         assertNotNull(page.getFieldErrorMessage("fade"));
+    }
+
+    @Test
+    public void verifySuccessMessageOnNewDisc() {
+        String expectedMessage = testModel + " was added to your collection";
+        DiscsPage discsPage = this.page.fillAndSubmitForm(testModel, testManufacturer, testSpeed, testGlide, testTurn, testFade, testNotes);
+
+        List<Map<String, String>> messages = discsPage.getMessages();
+        assertTrue(messages.size() > 0);
+        Map<String, String> firstMessage = messages.get(0);
+        assertEquals("Success", firstMessage.get("type"));
+        assertEquals(expectedMessage, firstMessage.get("message"));
     }
 
 }

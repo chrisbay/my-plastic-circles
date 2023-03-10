@@ -6,7 +6,7 @@ import { DiscService } from "./service/disc.service";
 import { ManufacturerService } from "./service/manufacturer.service";
 import { MessageService } from "./service/message.service";
 
-export abstract class BaseComponent {
+export abstract class AbstractBaseComponent {
 
   protected fb: FormBuilder;
   protected discService: DiscService;

@@ -3,12 +3,12 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Disc } from "../model/disc";
-import { BaseService } from "./base.service";
+import { AbstractBaseService } from "./abstract-base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiscService extends BaseService {
+export class DiscService extends AbstractBaseService {
 
   private discsUrl: string = 'http://localhost:8081/api/disc';
 

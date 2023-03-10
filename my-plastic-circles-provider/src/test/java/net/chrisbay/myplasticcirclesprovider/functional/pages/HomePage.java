@@ -1,4 +1,4 @@
-package net.chrisbay.myplasticcirclesprovider.ui.pages;
+package net.chrisbay.myplasticcirclesprovider.functional.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

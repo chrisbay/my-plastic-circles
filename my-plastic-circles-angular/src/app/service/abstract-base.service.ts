@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 
-export abstract class BaseService {
+export abstract class AbstractBaseService {
 
   protected handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage: string;

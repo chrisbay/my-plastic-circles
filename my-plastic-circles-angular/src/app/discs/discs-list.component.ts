@@ -1,13 +1,13 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BaseComponent } from '../base.component';
+import { AbstractBaseComponent } from '../abstract-base.component';
 import { Disc } from '../model/disc';
 import { MessageType } from '../model/message';
 
 @Component({
   templateUrl: './discs-list.component.html'
 })
-export class DiscsListComponent extends BaseComponent implements OnInit {
+export class DiscsListComponent extends AbstractBaseComponent implements OnInit {
 
   discs: Disc[];
 
@@ -18,7 +18,7 @@ export class DiscsListComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.discService.getAll().subscribe({
       next: discs => this.discs = discs,
-      error: err => this.messageService.addMessage({type: MessageType.Error, message: err})
+      error: err => this.handleError(err)
     });
   }
 

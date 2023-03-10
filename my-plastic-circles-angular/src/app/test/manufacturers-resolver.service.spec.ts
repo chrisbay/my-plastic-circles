@@ -12,7 +12,7 @@ describe('ManufacturersResolver', () => {
     manufactuersResolver = new ManufacturersResolver(manufacturerServiceSpy);
   });
 
-  it('resolve to the expected manufacturers (calls Manufacturers.getAll)', (done: DoneFn) => {
+  it('resolves to the expected manufacturers (calls Manufacturers.getAll)', (done: DoneFn) => {
     const expectedManufacturers = [
       {
         id: 1,

@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import { ActivatedRoute, convertToParamMap } from "@angular/router";
+import { ActivatedRoute, convertToParamMap, RouterStateSnapshot } from "@angular/router";
 import { DiscResolver } from "../service/disc-resolver.service";
 import { DiscService } from "../service/disc.service";
 import { asyncData } from "./async-observable-helpers";
@@ -43,7 +43,7 @@ describe('DiscResolver', () => {
       .and
       .returnValue(asyncData(expectedDisc));
 
-    const state = jasmine.createSpyObj('RouterStateSnapshot', ['']);
+    const state: RouterStateSnapshot = jasmine.createSpyObj('RouterStateSnapshot', ['']);
     discResolver.resolve(route.snapshot, state).subscribe({
       next: discResolved => {
         expect(discResolved.disc).toBe(expectedDisc);

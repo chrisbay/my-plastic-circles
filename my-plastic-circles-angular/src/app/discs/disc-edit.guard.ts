@@ -14,13 +14,16 @@ export class DiscEditGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const idParam = next.paramMap.get('id');
-      const id = Number(idParam);
+    state: RouterStateSnapshot): boolean {
+
+    const idParam = next.paramMap.get('id');
+    const id = Number(idParam);
+    console.log(`ID: ${id}`);
+
     if (isNaN(id) || id < 1) {
       this.messageService.addMessage({
         type: MessageType.Error, 
-        message: `Invalid disc id: ${idParam}`
+        message: `Invalid disc id: <b>${idParam}</b>`
       });
       this.router.navigate(['/discs']);
       return false;
