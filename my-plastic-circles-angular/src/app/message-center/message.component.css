@@ -1,0 +1,19 @@
+.toast .toast-header {
+  background-color: #eee;
+}
+.toast .toast-header i {
+  margin-right: .25rem;
+  font-size: 1.25rem;
+}
+.toast .toast-header i.fa-circle-info {
+  color: blue;
+}
+.toast .toast-header i.fa-triangle-exclamation {
+  color: rgb(240, 214, 16);
+}
+.toast .toast-header i.fa-circle-xmark {
+  color: red;
+}
+.toast .toast-header i.fa-check {
+  color: green;
+}

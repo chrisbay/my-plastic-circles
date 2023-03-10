@@ -1,0 +1,25 @@
+<main class="container-fluid">
+
+  <h1>Disc Manufacturers</h1>
+
+  <a 
+    routerLink="/manufacturers/new"
+    id="add-manufacturer-btn" 
+    class="btn btn-primary" href="#">
+    <i class="fa-solid fa-plus pe-2"></i>Add Manufacturer
+  </a>
+
+  <table id="manufacturers-table" class="table table-striped">
+      <thead>
+          <tr>
+              <th>Name</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let manufacturer of manufacturers">
+            <td>{{ manufacturer.name }}</td>
+        </tr>
+      </tbody>
+  </table>
+
+</main>

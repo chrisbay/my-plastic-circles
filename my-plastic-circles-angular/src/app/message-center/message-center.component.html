@@ -1,0 +1,8 @@
+<div class="toast-container" id="message-center">
+  <div *ngFor="let message of messages; index as i">
+    <mpc-message
+      [type]="message.type"
+      [message]="message.message"
+      (clearEvent)="clearMessage(i)"></mpc-message>
+  </div>
+</div>

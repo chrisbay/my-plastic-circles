@@ -1,0 +1,142 @@
+<main class="container-fluid">
+
+  <div class="row justify-content-center">
+    <div class="col-6">
+
+      <h1>{{ pageTitle }}</h1>
+
+      <p class="required-msg"><i class="fa-solid fa-asterisk required" title="Required"></i>Required</p>
+
+      <form 
+        id="disc-form"
+        class="mb-4"
+        novalidate
+        (ngSubmit)="onSubmit(isNew)"
+        [formGroup]="discForm">
+
+        <div class="mb-3">
+          <label class="form-label" for="model-input">Model<i class="fa-solid fa-asterisk required"
+              title="Required"></i></label>
+          <input 
+            formControlName="model" 
+            id="model-input" 
+            class="form-control"
+            [ngClass]="{'is-invalid': modelMessage }" />
+          <div *ngIf="discForm.get('model')?.errors" class="form-error mt-2" id="model.errors">
+            {{ modelMessage }}
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="manufacturer-input">Manufacturer<i class="fa-solid fa-asterisk required"
+              title="Required"></i></label>
+          <select 
+            formControlName="manufacturer" 
+            id="manufacturer-input"
+            class="form-select"
+            [ngClass]="{'is-invalid': isInvalid('manufacturer') }">
+            <option 
+              *ngFor="let manufacturer of manufacturers" 
+              [ngValue]="manufacturer">{{manufacturer.name}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <div class="row">
+            <div class="col-3">
+              <label class="form-label" for="speed-input">Speed<i class="fa-solid fa-asterisk required"
+                  title="Required"></i></label>
+              <input 
+                formControlName="speed" 
+                type="number" 
+                id="speed-input" 
+                class="form-control"
+                [ngClass]="{'is-invalid': isInvalid('speed') }" />
+              <div *ngIf="isInvalid('speed')" class="form-error mt-2" id="speed.errors">
+                Valid range: 1-14
+              </div>
+            </div>
+            <div class="col-3">
+              <label class="form-label" for="glide-input">Glide<i class="fa-solid fa-asterisk required"
+                  title="Required"></i></label>
+              <input 
+                formControlName="glide" 
+                type="number" 
+                id="glide-input" 
+                class="form-control"
+                [ngClass]="{'is-invalid': isInvalid('glide') }" />
+              <div *ngIf="isInvalid('glide')" class="form-error mt-2" id="glide.errors">
+                Valid range: 1-7
+              </div>
+            </div>
+            <div class="col-3">
+              <label class="form-label" for="turn-input">Turn<i class="fa-solid fa-asterisk required"
+                  title="Required"></i></label>
+              <input 
+                formControlName="turn" 
+                type="number" 
+                id="turn-input" 
+                class="form-control"
+                [ngClass]="{'is-invalid': isInvalid('turn') }" />
+              <div *ngIf="isInvalid('turn')" class="form-error mt-2" id="turn.errors">
+                Valid range: -5-1
+              </div>
+            </div>
+            <div class="col-3">
+              <label class="form-label" for="fade-input">Fade<i class="fa-solid fa-asterisk required"
+                  title="Required"></i></label>
+              <input 
+                formControlName="fade" 
+                type="number" 
+                id="fade-input" 
+                class="form-control"
+                [ngClass]="{'is-invalid': isInvalid('fade') }" />
+              <div *ngIf="isInvalid('fade')" class="form-error mt-2" id="fade.errors">
+                Valid range: 0-5
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="mb-3">
+            <label class="form-label" for="notes-input">Notes</label>
+            <textarea formControlName="notes" id="notes-input" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <button *ngIf="isNew" type="submit" class="btn btn-success" [disabled]="!discForm.valid">
+          <i class="fa-solid fa-plus pe-2"></i>Create
+        </button>
+
+        <button *ngIf="!isNew" type="submit" class="btn btn-success" [disabled]="!discForm.valid">
+          <i class="fa-solid fa-floppy-disk pe-2"></i>Save
+        </button>
+      </form>
+
+      <div *ngIf="!isNew">
+        <a href="#" id="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete disc</a>
+
+        <div class="modal" tabindex="-1" id="confirmDeleteModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>This action can not be undone.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" (click)="onDelete()" data-bs-dismiss="modal" id="confirmDeleteButton">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>

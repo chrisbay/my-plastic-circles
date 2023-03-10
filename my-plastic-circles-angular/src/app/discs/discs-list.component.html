@@ -1,0 +1,40 @@
+<main class="container-fluid">
+
+  <h1>My Collection</h1>
+
+  <a 
+    routerLink="/discs/0/edit"
+    id="add-disc-btn" 
+    class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Add Disc</a>
+
+  <table 
+    *ngIf="discs && discs.length"
+    id="discs-table" 
+    class="table table-striped">
+    <thead>
+      <tr>
+          <td></td>
+          <th>Manufacturer</th>
+          <th>Model</th>
+          <th>Flight Numbers</th>
+          <th>Notes</th>
+          <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let disc of discs">
+          <td>
+              <i (click)="toggleFavoriteStatus(disc)"
+                [class]="disc.favorite ? 'fa-solid fa-star' : 'fa-regular fa-star'"
+                [attr.title]="disc.favorite ? 'Remove from favorites' : 'Add to favorites'"></i>
+          </td>
+          <td>{{disc.manufacturer.name}}</td>
+          <td>{{disc.model}}</td>
+          <td>{{disc.speed}} / {{disc.glide}} / {{disc.turn}} / {{disc.fade}}</td>
+          <td>{{disc.notes}}</td>
+          <td><a routerLink="/discs/{{disc.id}}/edit"><i class="fa-solid fa-pen-to-square" title="Edit disc"></i></a></td>
+      </tr>
+      </tbody>
+  </table>
+
+</main>
