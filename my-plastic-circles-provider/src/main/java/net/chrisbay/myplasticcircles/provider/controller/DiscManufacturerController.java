@@ -1,5 +1,6 @@
 package net.chrisbay.myplasticcircles.provider.controller;
 
+import jakarta.validation.Valid;
 import net.chrisbay.myplasticcircles.provider.exception.ValidationException;
 import net.chrisbay.myplasticcircles.provider.model.DiscManufacturer;
 import net.chrisbay.myplasticcircles.provider.service.DiscManufacturerService;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

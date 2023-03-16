@@ -1,12 +1,12 @@
 package net.chrisbay.myplasticcircles.provider.service;
 
+import jakarta.transaction.Transactional;
 import net.chrisbay.myplasticcircles.provider.exception.ResourceDoesNotExistException;
 import net.chrisbay.myplasticcircles.provider.model.DiscManufacturer;
 import net.chrisbay.myplasticcircles.provider.repository.DiscManufacturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
